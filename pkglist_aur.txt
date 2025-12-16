@@ -1,0 +1,6 @@
+1password
+antigravity
+brave-bin
+galaxybudsclient-bin
+legcord-bin
+pwvucontrol
