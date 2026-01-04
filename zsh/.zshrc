@@ -107,3 +107,10 @@ source $ZSH/oh-my-zsh.sh
 # Load personal configuration files
 source ~/.zsh/init
 source ~/.zsh/aliases
+# pnpm
+export PNPM_HOME="/home/gabriele/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
