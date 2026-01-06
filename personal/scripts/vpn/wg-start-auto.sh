@@ -1,11 +1,16 @@
 #!/bin/bash
+import os
+from dotenv import load_dotenv
 
-# --- CONFIGURAZIONE ---
-TELEGRAM_TOKEN="8224768566:AAHHr3SH3qiTKYWSl9ZPH1BYb5vr8-n6qYM"   # <--- SOSTITUISCI IL TUO TOKEN
-CHAT_ID="IL_TUO_CHAT_ID"             # <--- SOSTITUISCI IL TUO CHAT ID
-COMMAND_START="/start"
-WAIT_TIME=10 # Tempo in secondi per l'avvio del container remoto
-INTERFACE="wg0"
+load_dotenv()
+
+
+# --- ENV ---
+TELEGRAM_TOKEN=os.getenv("TELEGRAM_TOKEN") 
+CHAT_ID=os.getenv("CHAT_ID")             
+COMMAND_START=os.getenv("COMMAND_START")
+WAIT_TIME=int(os.getenv("WAIT_TIME"))
+INTERFACE=os.getenv("INTERFACE")
 # ----------------------
 
 echo "--> Invio comando di avvio ('${COMMAND_START}') al bot Telegram..."
