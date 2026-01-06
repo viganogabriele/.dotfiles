@@ -3,7 +3,7 @@
 # --- Environment Setup ---
 # Use absolute path to ensure the script works regardless of where it's called
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STOW_FOLDERS=("ghostty" "hypr" "swayosd" "walker" "waybar" "xcompose" "zsh" "personal")
+STOW_FOLDERS=("ghostty" "hypr" "swayosd" "walker" "waybar" "xcompose" "zsh" "personal" "uwsm")
 SEP='\n------------------------------------\n'
 
 # Logging helpers
