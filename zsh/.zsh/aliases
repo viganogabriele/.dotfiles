@@ -1,16 +1,45 @@
-alias ls='eza -lh --group-directories-first --icons=auto'
-alias lsa='ls -a'
-alias lt='eza --tree --level=2 --long --icons --git'
-alias lta='lt -a'
+# --- Files (eza) ---
+alias ls='eza -lh --group-directories-first --icons=auto' # List files with details; directories first; show icons
+alias lsa='ls -a' # List all files, including hidden ones
+alias ll='eza -lah --group-directories-first --icons=auto' # List all files with details, including hidden
+alias lt='eza --tree --level=2 --long --icons --git' # Directory tree (2 levels) with details, icons, and Git info
+alias lta='lt -a' # Tree view including hidden files
+alias ltt='eza --tree --level=3 --long --icons --git' # Directory tree (3 levels) with details and Git info
 
-# Custom aliases for git
-alias gs='git status'
-alias gc='git commit -m'
-alias gca='git commit -a -m'
+# --- Git ---
+alias gs='git status' # Show working tree status
+alias gc='git commit -m' # Create a commit with the given message
+alias gca='git commit -a -m' # Commit all tracked changes with the given message
+alias ga='git add' # Stage files by path
+alias gaa='git add -A' # Stage all changes
+alias gpl='git pull --rebase' # Pull latest changes and rebase local commits
+alias gp='git push' # Push current branch to remote
+alias gpf='git push --force-with-lease' # Safe force push protecting remote updates
+alias gco='git checkout' # Switch branches or restore working tree files
+alias gcb='git checkout -b' # Create a new branch and switch to it
+alias gb='git branch' # List and manage local branches
+alias gl='git log --oneline --graph --decorate --all' # Compact commit graph for all branches
+alias gd='git diff' # Show working tree changes
+alias gds='git diff --staged' # Show staged changes
+alias gstash='git stash -u' # Stash changes including untracked files
+alias gpop='git stash pop' # Apply and drop latest stash
+alias gamend='git commit --amend --no-edit' # Amend last commit without changing the message
 
-# SSH connection to telegram bot VPN on proxmox
-alias bot-edit='code --new-window --folder-uri "vscode-remote://ssh-remote+root@192.168.1.9/root"' 
 
-# Custom Night Mode Aliases
-alias night="pkill hyprsunset; hyprsunset --temperature 3500K &"
-alias day="pkill hyprsunset"
+# --- Gitleaks (Security) ---
+alias gld='gitleaks detect -v'             # Scan entire Git history for secrets (verbose)
+alias glp='gitleaks protect --staged -v'   # Scan only staged changes for secrets (verbose)
+alias glf='gitleaks detect -v --no-git'    # Scan current folder files without using Git history (verbose)
+
+# --- Remote Dev ---
+alias bot-edit='code --new-window --folder-uri "vscode-remote://ssh-remote+root@192.168.1.9/root"' # Open VS Code remotely via SSH to Proxmox host (192.168.1.9)
+
+# --- Display / Night Mode ---
+alias night="pkill hyprsunset; hyprsunset --temperature 3500K &" # Enable night color temperature (3500K) to reduce blue light
+alias day="pkill hyprsunset" # Disable night mode by stopping hyprsunset
+
+# --- VPN ---
+alias vpn-start='~/.dotfiles/personal/scripts/vpn/wg-start-auto.sh' # Start WireGuard VPN via auto-start script
+alias vpn-status='wg show' # Show WireGuard status for all interfaces
+# alias vpn-stop='sudo wg-quick down wg0' # Stop WireGuard on interface wg0
+# alias vpn-restart='sudo wg-quick down wg0 && sudo wg-quick up wg0' # Restart WireGuard on wg0
