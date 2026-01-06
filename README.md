@@ -73,9 +73,22 @@ This repo uses **Gitleaks** to prevent accidentally pushing sensitive data (API 
 
 ---
 
-## 📁 Project Structure
+### 📁 Project Structure
 
-* `hypr/`, `waybar/`, `walker/`, `ghostty/`: App configurations.
-* `zsh/`: Zsh settings and aliases.
-* `sync.sh`: Safety-first synchronization script.
-* `pkglist_*.txt`: Lists of all installed programs.
+* **`hypr/`, `waybar/`, `walker/`, `ghostty/`, `uwsm/`, `swayosd/`, `xcompose/**`: Core application configurations managed via Stow.
+* **`zsh/`**: Zsh environment, Oh My Zsh, and custom plugins.
+* **`personal/`**: Your custom scripts (like the system and DNS menus).
+* **`pkglist_*.txt`**: Detailed lists of native and AUR packages for system replication.
+* **`vscode_extensions.txt`**: A list of all VS Code extensions to be reinstalled automatically.
+
+---
+
+### 🛠️ Maintenance Scripts
+
+This repository uses a few helper scripts to keep both of my machines in sync:
+
+| Script | Purpose |
+| --- | --- |
+| `install.sh` | **The Bootstrapper**: Updates the system, installs `yay`, `pnpm`, and all packages from the lists, then links everything with `stow`. |
+| `sync.sh` | **The Pusher**: Checks for secrets via Gitleaks, updates the package lists, and pushes all changes to GitHub. (Aliased to `dotsave`). |
+| `refresh_lists.sh` | **The Chronicler**: Specifically updates `pkglist_native.txt` and `pkglist_aur.txt` with the current installed packages. |
