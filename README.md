@@ -75,7 +75,7 @@ This repo uses **Gitleaks** to prevent accidentally pushing sensitive data (API 
 
 ### 📁 Project Structure
 
-* **`hypr/`, `waybar/`, `walker/`, `ghostty/`, `uwsm/`, `swayosd/`, `xcompose/**`: Core application configurations managed via Stow.
+* **`hypr/`, `waybar/`, `walker/`, `ghostty/`, `uwsm/`, `swayosd/`, `xcompose/`**: Core application configurations managed via Stow.
 * **`zsh/`**: Zsh environment, Oh My Zsh, and custom plugins.
 * **`personal/`**: Your custom scripts (like the system and DNS menus).
 * **`pkglist_*.txt`**: Detailed lists of native and AUR packages for system replication.
