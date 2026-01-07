@@ -27,6 +27,7 @@ alias gamend='git commit --amend --no-edit' # Amend last commit without changing
 
 
 # --- Gitleaks (Security) ---
+alias glc='gitleaks detect --log-opts="-1" -v'  # Scan current Git repo for secrets and limit log output to last line (verbose)
 alias gld='gitleaks detect -v'             # Scan entire Git history for secrets (verbose)
 alias glp='gitleaks protect --staged -v'   # Scan only staged changes for secrets (verbose)
 alias glf='gitleaks detect -v --no-git'    # Scan current folder files without using Git history (verbose)
