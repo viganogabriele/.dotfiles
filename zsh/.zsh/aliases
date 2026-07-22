@@ -44,3 +44,9 @@ alias vpn-start='~/.dotfiles/personal/scripts/vpn/wg-start-auto.sh' # Start Wire
 alias vpn-status='wg show' # Show WireGuard status for all interfaces
 # alias vpn-stop='sudo wg-quick down wg0' # Stop WireGuard on interface wg0
 # alias vpn-restart='sudo wg-quick down wg0 && sudo wg-quick up wg0' # Restart WireGuard on wg0
+
+# --- Commands ---
+alias fixnet='sudo ip link set enp0s13f0u1c2 down && sudo ip link set enp0s13f0u1c2 up'
+
+# --- SSH connections ---
+alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@79.72.45.94'

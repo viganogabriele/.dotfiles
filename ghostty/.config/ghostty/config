@@ -10,7 +10,8 @@ font-style-italic = false
 font-style-bold-italic = false
 font-size = 15
 
-shell-integration-features = no-cursor,no-sudo,no-title
+shell-integration-features = no-cursor,no-sudo,no-title,ssh-env,ssh-terminfo
+
 gtk-titlebar = false
 
 confirm-close-surface = false
@@ -26,3 +27,6 @@ keybind = ctrl+shift+v=unbind
 
 # Slowdown mouse scrolling
 mouse-scroll-multiplier = 0.95
+
+# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+async-backend = epoll
