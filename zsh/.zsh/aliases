@@ -49,4 +49,4 @@ alias vpn-status='wg show' # Show WireGuard status for all interfaces
 alias fixnet='sudo ip link set enp0s13f0u1c2 down && sudo ip link set enp0s13f0u1c2 up'
 
 # --- SSH connections ---
-alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@79.72.45.94'
+alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@100.104.219.13'
