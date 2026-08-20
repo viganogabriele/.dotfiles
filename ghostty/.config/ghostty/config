@@ -8,7 +8,7 @@ background-blur = 0
 font-family = "JetBrainsMono Nerd Font"
 font-style-italic = false
 font-style-bold-italic = false
-font-size = 15
+font-size = 9
 
 shell-integration-features = no-cursor,no-sudo,no-title,ssh-env,ssh-terminfo
 
@@ -30,3 +30,9 @@ mouse-scroll-multiplier = 0.95
 
 # Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
 async-backend = epoll
+
+# Send Shift+Enter as CSI-u so TUIs can distinguish it from Enter.
+keybind = shift+enter=csi:13;2u
+
+# Legacy encoding sends Alt+Shift+Enter the same as Alt+Enter; send CSI-u so tmux can match M-S-Enter.
+keybind = alt+shift+enter=csi:13;4u

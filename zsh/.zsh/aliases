@@ -48,6 +48,21 @@ alias vpn-status='wg show' # Show WireGuard status for all interfaces
 # --- Commands ---
 alias fixnet='sudo ip link set enp0s13f0u1c2 down && sudo ip link set enp0s13f0u1c2 up'
 
+# Open/close dev ports on the firewall on demand (e.g. testing pnpm dev from mobile).
+# No argument: 3000 (Next.js/dev), 5500 (Live Server), 8081 (Metro/Expo).
+# Usage: devopen [port] | devclose [port]
+DEV_PORTS=(3000 5500 8081)
+devopen() {
+  local ports=("${@:-${DEV_PORTS[@]}}")
+  pkexec sh -c "$(for p in "${ports[@]}"; do echo "ufw allow $p/tcp;"; done)" \
+    && echo "Porte aperte: ${ports[*]}"
+}
+devclose() {
+  local ports=("${@:-${DEV_PORTS[@]}}")
+  pkexec sh -c "$(for p in "${ports[@]}"; do echo "ufw delete allow $p/tcp;"; done)" \
+    && echo "Porte chiuse: ${ports[*]}"
+}
+
 # --- Quick notes ---
 # Open Micro in the Documents folder for quick text notes.
 alias mdocs='mkdir -p "$HOME/Documents" && cd "$HOME/Documents" && micro'
