@@ -51,10 +51,28 @@ Source of truth to port from: `hypr/.config/hypr/bindings.conf` in this repo
 
 ### 1. Per-monitor workspaces (the important one)
 
-Provided by the hyprpm plugin **split-monitor-workspaces** (zjeffer), installed
-and enabled pre-upgrade. It gives each monitor its own independent set of 10
-workspaces (monitor 1 → 1-10, monitor 2 → 11-20), so `SUPER+1..0` always means
-"this monitor's Nth workspace".
+Provided by the hyprpm plugin **split-monitor-workspaces** (zjeffer). It gives
+each monitor its own independent set of 10 workspaces (monitor 1 → 1-10,
+monitor 2 → 11-20), so `SUPER+1..0` always means "this monitor's Nth workspace".
+
+**Status: disabled on 2026-08-20, before the upgrade.** It is still installed
+and built under hyprpm (`hyprpm list` shows it), just not loaded: the config
+block and its binds are gone from `bindings.conf` and `exec-once = hyprpm
+reload -n` is commented out in `autostart.conf`.
+
+Why it was disabled — the failure mode to solve before re-enabling: the plugin
+assigns workspace ranges in the order it encounters monitors, so unplugging the
+external screen re-enumerated the laptop panel onto a fresh empty 21-30 range
+while the open windows stayed behind on an orphaned 11-20. Result: a blank
+laptop screen with no obvious way back into the session. Setting
+`monitor_priority = eDP-1, HDMI-A-1, DP-2` pinned which monitor owns which
+range and fixed the reassignment, but windows already sitting on a range that
+lost its monitor were still stranded. `hyprctl dispatch split-grabroguewindows`
+pulls such windows back onto the active monitor and is the manual escape hatch.
+
+So the Lua port needs an answer for monitor hotplug, not just a translation of
+the binds. Worth checking whether Quattro's own multi-monitor handling, or the
+plugin's maintained Lua package, behaves better here before reintroducing it.
 
 Legacy `.conf` form currently in use:
 
