@@ -48,6 +48,10 @@ alias vpn-status='wg show' # Show WireGuard status for all interfaces
 # --- Commands ---
 alias fixnet='sudo ip link set enp0s13f0u1c2 down && sudo ip link set enp0s13f0u1c2 up'
 
+# --- Quick notes ---
+# Open Micro in the Documents folder for quick text notes.
+alias mdocs='mkdir -p "$HOME/Documents" && cd "$HOME/Documents" && micro'
+
 # --- SSH connections ---
 alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@100.104.219.13'
 

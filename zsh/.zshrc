@@ -127,3 +127,11 @@ export PATH="$PNPM_HOME/bin:$PATH"
 # >>> Codex installer >>>
 export PATH="/home/gabriele/.local/bin:$PATH"
 # <<< Codex installer <<<
+
+# Profila con callgrind + kcachegrind un test del progetto-api (uso: profila < file_di_test)
+profila() {
+    make main || return 1
+    rm -f callgrind.out.tmp
+    valgrind --tool=callgrind --callgrind-out-file=callgrind.out.tmp ./main > /dev/null
+    kcachegrind callgrind.out.tmp
+}

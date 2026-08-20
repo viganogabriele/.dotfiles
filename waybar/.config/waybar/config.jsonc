@@ -6,7 +6,8 @@
   "height": 26,
   "modules-left": [
     "custom/omarchy",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/kb-layout"
   ],
   "modules-center": [
     "clock",
@@ -18,14 +19,14 @@
     "custom/notification-silencing-indicator"
   ],
   "modules-right": [
-    "custom/ai-usage",
     "custom/separator-right",
+    "custom/codexbar-usage",
     "group/tray-expander",
     "bluetooth",
     "network",
     "pulseaudio",
     "cpu",
-    "battery"
+    "custom/battery-power"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -41,8 +42,7 @@
       "7": "7",
       "8": "8",
       "9": "9",
-      "10": "0",
-      "active": "󱓻"
+      "10": "0"
     },
     "persistent-workspaces": {
       "1": [],
@@ -51,6 +51,12 @@
       "4": [],
       "5": []
     }
+  },
+  "custom/kb-layout": {
+    "exec": "cat ~/.cache/kb-layout-state 2>/dev/null || echo us",
+    "interval": "once",
+    "signal": 11,
+    "tooltip": false
   },
   "custom/omarchy": {
     "format": "<span font='omarchy'></span>",
@@ -80,7 +86,7 @@
   "custom/weather": {
     "exec": "$OMARCHY_PATH/default/waybar/weather.sh",
     "return-type": "json",
-    "interval": 60,
+    "interval": 300,
     "tooltip": false,
     "on-click": "notify-send -u low \"$(omarchy-weather-status)\""
   },
@@ -103,11 +109,20 @@
     "spacing": 1,
     "on-click": "omarchy-launch-wifi"
   },
+  "custom/battery-power": {
+    "exec": "/home/gabriele/.config/waybar/scripts/battery-power.sh",
+    "return-type": "json",
+    "interval": 5,
+    "format": "{}",
+    "escape": false,
+    "on-click": "omarchy-menu power",
+    "on-click-right": "notify-send -u low \"$(omarchy-battery-status)\""
+  },
   "battery": {
     "format": "{capacity}% {icon}",
     "format-discharging": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": " {capacity}%",
+    "format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "format-plugged": "{power:>1.0f}W↑ {capacity}%",
     "format-icons": {
       "charging": [
         "󰢜",
@@ -221,13 +236,13 @@
     "icon-size": 12,
     "spacing": 17
   },
-  "custom/ai-usage": {
-    "exec": "/home/gabriele/.config/waybar/scripts/ai-usage.sh",
+  "custom/codexbar-usage": {
+    "exec": "/home/gabriele/.config/waybar/scripts/codexbar-usage.sh",
     "return-type": "json",
-    "interval": 60,
-    "signal": 9,
+    "interval": 300,
     "tooltip": true,
+    "escape": false,
     "format": "{}",
-    "on-click": "omarchy-launch-floating-terminal-with-presentation /home/gabriele/.config/waybar/scripts/ai-usage-tui.sh"
+    "on-click": "omarchy-launch-floating-terminal-with-presentation /home/gabriele/.config/waybar/scripts/codexbar-usage-details.sh"
   }
 }
