@@ -6,10 +6,13 @@
 hl.config({
   input = {
     -- US (international, for accented letters via ' and ` dead keys) + IT.
-    -- Switch between them with Left Alt + Right Alt (grp:alts_toggle).
+    -- Switch between them with Left Alt + Left Shift (grp:alt_shift_toggle).
+    -- NOTE: previously "grp:alts_toggle" (Left Alt + Right Alt), but that
+    -- option grabs the Right Alt key so it can no longer act as AltGr on
+    -- the IT layout, breaking AltGr+o (@) and other AltGr symbols.
     kb_layout = "us,it",
     kb_variant = "intl,",
-    kb_options = "grp:alts_toggle",
+    kb_options = "grp:alt_shift_toggle",
 
     -- Change speed of keyboard repeat.
     repeat_rate = 40,
@@ -24,6 +27,12 @@ hl.config({
 
       -- Control the speed of your scrolling.
       scroll_factor = 0.4,
+
+      -- Omarchy's default turns this on, which makes right/middle click
+      -- depend on how many fingers are down for ANY click, instead of
+      -- clicking in the physical bottom-right/bottom-middle button area.
+      -- Turn it off to get a real "right-click button" in the corner back.
+      clickfinger_behavior = false,
     },
   },
 })
