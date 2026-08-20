@@ -1,0 +1,11 @@
+[Unit]
+Description=Enable night light at 19:00
+Requires=omarchy-nightlight-on.service
+
+[Timer]
+OnCalendar=*-*-* 19:00:00
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

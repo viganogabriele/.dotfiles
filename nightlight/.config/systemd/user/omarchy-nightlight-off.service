@@ -1,0 +1,9 @@
+[Unit]
+Description=Disable night light (neutral screen temperature)
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/omarchy/nightlight-schedule.sh off
+Environment=DISPLAY=:0
+LogLevelMax=warning

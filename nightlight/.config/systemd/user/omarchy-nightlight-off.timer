@@ -1,0 +1,11 @@
+[Unit]
+Description=Disable night light at 08:00
+Requires=omarchy-nightlight-off.service
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

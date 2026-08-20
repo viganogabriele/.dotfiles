@@ -1,0 +1,9 @@
+[Unit]
+Description=Enable night light (warm screen temperature)
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/omarchy/nightlight-schedule.sh on
+Environment=DISPLAY=:0
+LogLevelMax=warning
