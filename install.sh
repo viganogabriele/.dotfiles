@@ -99,6 +99,16 @@ if command -v code &> /dev/null && [[ -f "$DOTFILES/vscode_extensions.txt" ]]; t
     done < "$DOTFILES/vscode_extensions.txt"
 fi
 
+# --- 8b. System files (outside $HOME, can't be stowed) ---
+log "Installing system-level fixes (udev rules, helper scripts)..."
+if [[ -f "$DOTFILES/system/bin/fixnet-flap.sh" ]]; then
+    sudo install -m 755 "$DOTFILES/system/bin/fixnet-flap.sh" /usr/local/bin/fixnet-flap.sh
+fi
+if [[ -f "$DOTFILES/system/udev/99-ethernet-fix.rules" ]]; then
+    sudo install -m 644 "$DOTFILES/system/udev/99-ethernet-fix.rules" /etc/udev/rules.d/99-ethernet-fix.rules
+    sudo udevadm control --reload-rules
+fi
+
 # --- 9. Finalization ---
 log "Finalizing system configuration..."
 # Ensure maintenance scripts are executable

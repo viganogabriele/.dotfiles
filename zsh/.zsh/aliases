@@ -46,7 +46,9 @@ alias vpn-status='wg show' # Show WireGuard status for all interfaces
 # alias vpn-restart='sudo wg-quick down wg0 && sudo wg-quick up wg0' # Restart WireGuard on wg0
 
 # --- Commands ---
-alias fixnet='sudo ip link set enp0s13f0u1c2 down && sudo ip link set enp0s13f0u1c2 up'
+# fixnet removed: automated by the udev rule + /usr/local/bin/fixnet-flap.sh
+# (see system/udev/99-ethernet-fix.rules) - the USB-C ethernet adapter now
+# flaps itself a few seconds after plug-in.
 
 # Open/close dev ports on the firewall on demand (e.g. testing pnpm dev from mobile).
 # No argument: 3000 (Next.js/dev), 5500 (Live Server), 8081 (Metro/Expo).
@@ -73,6 +75,10 @@ alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o Serve
 # --- AI cli ---
 alias codex-r='codex resume'
 alias claude-r='claude --resume'
+alias codex-b='codex --dangerously-bypass-approvals-and-sandbox'
+alias claude-b='claude --dangerously-skip-permissions'
+alias codex-rb='codex resume --dangerously-bypass-approvals-and-sandbox'
+alias claude-rb='claude --resume --dangerously-skip-permissions'
 
 # --- Hyprland plugins ---
 alias hyprfix='hyprpm update && hyprpm reload' # Rebuild/reload hyprpm plugins after a Hyprland version bump

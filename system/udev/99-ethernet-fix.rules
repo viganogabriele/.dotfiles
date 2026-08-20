@@ -1,0 +1,17 @@
+# Flap the link a few seconds after plug-in to force the USB-C ethernet
+# adapter to renegotiate - equivalent to the old fixnet alias.
+#
+# ACTION=="move" (not "add"): this MAC is created as a transient "ethN"
+# name and immediately renamed to its stable enp0s13f0uXcY name within
+# the same add event, so %k/$env{INTERFACE} read during "add" are frozen
+# on the old "ethN" name and ip link fails with "No such device". The
+# rename fires a separate "move" uevent, after which %k is correct.
+#
+# The flap itself needs a short delay: doing it immediately on device
+# creation is too early - the PHY has not even attempted autonegotiation
+# yet, so a flap right away accomplishes nothing (this is why the manual
+# fixnet alias, run only after noticing the connection is stuck, works
+# but a synchronous flap in the udev rule did not). Delegate to a
+# detached script via systemd-run --no-block so udev itself is not
+# blocked for the duration of the sleep.
+ACTION=="move", SUBSYSTEM=="net", ATTR{address}=="9c:69:d3:40:99:01", RUN+="/usr/bin/systemd-run --no-block --collect --unit=fixnet-flap-%k /usr/local/bin/fixnet-flap.sh %k"
