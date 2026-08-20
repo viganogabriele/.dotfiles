@@ -58,3 +58,6 @@ alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o Serve
 # --- AI cli ---
 alias codex-r='codex resume'
 alias claude-r='claude --resume'
+
+# --- Hyprland plugins ---
+alias hyprfix='hyprpm update && hyprpm reload' # Rebuild/reload hyprpm plugins after a Hyprland version bump

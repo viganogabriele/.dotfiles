@@ -78,6 +78,7 @@ This repo uses **Gitleaks** to prevent accidentally pushing sensitive data (API 
 * **`hypr/`, `waybar/`, `walker/`, `ghostty/`, `uwsm/`, `swayosd/`, `xcompose/`**: Core application configurations managed via Stow.
 * **`zsh/`**: Zsh environment, Oh My Zsh, and custom plugins.
 * **`personal/`**: Your custom scripts (like the system and DNS menus).
+* **`OMARCHY-QUATTRO-MIGRATION.md`**: What the Omarchy 4 "Quattro" upgrade changes, which stow packages it retires, and the customizations that must be ported from Hyprland `.conf` to Lua.
 * **`pkglist_*.txt`**: Detailed lists of native and AUR packages for system replication.
 * **`vscode_extensions.txt`**: A list of all VS Code extensions to be reinstalled automatically.
 
