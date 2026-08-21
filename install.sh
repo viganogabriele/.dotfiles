@@ -3,7 +3,9 @@
 # --- Environment Setup ---
 # Use absolute path to ensure the script works regardless of where it's called
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STOW_FOLDERS=("battery" "ghostty" "hypr" "swayosd" "walker" "waybar" "xcompose" "zsh" "personal" "uwsm")
+# waybar/walker/swayosd dropped: Omarchy 4 "Quattro" replaced all three with
+# its own Quickshell-based bar/launcher/OSD (see OMARCHY-QUATTRO-MIGRATION.md).
+STOW_FOLDERS=("agents" "battery" "ghostty" "hypr" "xcompose" "zsh" "personal" "uwsm")
 SEP='\n------------------------------------\n'
 
 # Logging helpers

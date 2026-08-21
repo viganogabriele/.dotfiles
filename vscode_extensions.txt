@@ -2,6 +2,7 @@ anthropic.claude-code
 biomejs.biome
 bradlc.vscode-tailwindcss
 catppuccin.catppuccin-vsc
+enkia.tokyo-night
 esbenp.prettier-vscode
 expo.vscode-expo-tools
 ivanvilchavskyi.nextgen-md-previewer
