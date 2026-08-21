@@ -1,0 +1,58 @@
+{ "workbench.colorTheme": "Catppuccin Mocha",
+    "keyboard.dispatch": "keyCode",
+    // --- BIOME & GENERAL FORMATTING ---
+    // Set Biome as the default formatter for supported files (JS, TS, JSON, etc.)
+    "editor.defaultFormatter": "biomejs.biome",
+
+    // Use Biome to organize imports on save (specifically for JS/TS)
+    "editor.codeActionsOnSave": {
+        "source.organizeImports.biome": "explicit"
+    },
+
+    // --- EXCEPTIONS ---
+    // Biome does not support Python, so we force the standard Python extension here
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+
+    // --- APPEARANCE ---
+    // Activate the Material Icon Theme
+    "workbench.iconTheme": "material-icon-theme",
+
+    // Optional: Zoom level (adjust as needed)
+    "window.zoomLevel": 1,
+    "editor.formatOnSave": true,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "biome.suggestInstallingGlobally": false,
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDelete": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "css": false
+    },
+    "json.schemaDownload.trustedDomains": {
+        "https://schemastore.azurewebsites.net/": true,
+        "https://raw.githubusercontent.com/": true,
+        "https://www.schemastore.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://json-schema.org/": true,
+        "https://biomejs.dev": true
+    },
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "redhat.telemetry.enabled": false,
+    "claudeCode.preferredLocation": "panel",
+    "makefile.configureOnOpen": true
+}
