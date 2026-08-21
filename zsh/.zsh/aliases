@@ -1,3 +1,23 @@
+# --- Navigation ---
+alias ..='cd ..' # Go up one directory
+alias ...='cd ../..' # Go up two directories
+alias ....='cd ../../..' # Go up three directories
+zd() { # zoxide-aware cd: real dir -> plain cd, otherwise try a zoxide jump, no args -> home
+  if (( $# == 0 )); then
+    builtin cd ~ || return
+  elif [[ -d $1 ]]; then
+    builtin cd "$1" || return
+  else
+    if ! z "$@"; then
+      echo "Error: Directory not found"
+      return 1
+    fi
+    printf "\U000F17A9 "
+    pwd
+  fi
+}
+alias cd='zd' # Use the zoxide-aware cd everywhere
+
 # --- Files (eza) ---
 alias ls='eza -lh --group-directories-first --icons=auto' # List files with details; directories first; show icons
 alias lsa='ls -a' # List all files, including hidden ones
@@ -6,7 +26,21 @@ alias lt='eza --tree --level=2 --long --icons --git' # Directory tree (2 levels)
 alias lta='lt -a' # Tree view including hidden files
 alias ltt='eza --tree --level=3 --long --icons --git' # Directory tree (3 levels) with details and Git info
 
+# --- Fuzzy search (fzf) ---
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  alias ff="fzf --preview 'case \$(file --mime-type -b {}) in image/*) kitty icat --clear --transfer-mode=memory --stdin=no --place=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0 {} ;; *) bat --style=numbers --color=always {} ;; esac'" # Fuzzy-find a file, with inline image preview in Kitty
+else
+  alias ff="fzf --preview 'bat --style=numbers --color=always {}'" # Fuzzy-find a file, with a syntax-highlighted preview
+fi
+alias eff='$EDITOR "$(ff)"' # Fuzzy-find a file and open it in $EDITOR
+
+# --- System ---
+open() ( # Open a file/URL with the desktop default app, detached and silenced
+  xdg-open "$@" >/dev/null 2>&1 &
+)
+
 # --- Git ---
+alias g='git' # Shorthand for git
 alias gs='git status' # Show working tree status
 alias gc='git commit -m' # Create a commit with the given message
 alias gca='git commit -a -m' # Commit all tracked changes with the given message
@@ -25,12 +59,113 @@ alias gstash='git stash -u' # Stash changes including untracked files
 alias gpop='git stash pop' # Apply and drop latest stash
 alias gamend='git commit --amend --no-edit' # Amend last commit without changing the message
 
-
 # --- Gitleaks (Security) ---
 alias glc='gitleaks detect --log-opts="-1" -v'  # Scan current Git repo for secrets and limit log output to last line (verbose)
 alias gld='gitleaks detect -v'             # Scan entire Git history for secrets (verbose)
 alias glp='gitleaks protect --staged -v'   # Scan only staged changes for secrets (verbose)
 alias glf='gitleaks detect -v --no-git'    # Scan current folder files without using Git history (verbose)
+
+# --- AI CLI ---
+alias a='omarchy-agent --inline' # Launch the default coding agent inline in this terminal
+alias c='code .' # Open the current directory in VS Code
+alias cx='printf "\033[2J\033[3J\033[H" && claude --permission-mode bypassPermissions' # Clear screen and start Claude with all permission checks bypassed
+alias cy='printf "\033[2J\033[3J\033[H" && codex -s danger-full-access -a never' # Clear screen and start Codex with full sandbox access and no approval prompts
+alias codex-r='codex resume' # Resume the last Codex session
+alias claude-r='claude --resume' # Resume the last Claude session
+alias codex-b='codex -s danger-full-access -a never' # Start Codex with full sandbox access and no approval prompts
+alias claude-b='claude --permission-mode bypassPermissions' # Start Claude with all permission checks bypassed
+alias codex-rb='codex resume -s danger-full-access -a never' # Resume Codex with full sandbox access and no approval prompts
+alias claude-rb='claude --resume --permission-mode bypassPermissions' # Resume Claude with all permission checks bypassed
+
+# Create a Tmux Dev Layout: editor pane + one or two AI panes, split from the current pane.
+# Usage: tdl <c|cx|codex|other_ai> [<second_ai>]
+tdl() {
+  [[ -z $1 ]] && { echo "Usage: tdl <c|cx|codex|other_ai> [<second_ai>]"; return 1; }
+  [[ -z $TMUX ]] && { echo "You must start tmux to use tdl."; return 1; }
+
+  local current_dir="${PWD}"
+  local editor_pane ai_pane ai2_pane
+  local ai="$1"
+  local ai2="$2"
+
+  editor_pane="$TMUX_PANE"
+  tmux rename-window -t "$editor_pane" "$(basename "$current_dir")"
+  tmux split-window -v -p 15 -t "$editor_pane" -c "$current_dir"
+  ai_pane=$(tmux split-window -h -p 30 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
+
+  if [[ -n $ai2 ]]; then
+    ai2_pane=$(tmux split-window -v -t "$ai_pane" -c "$current_dir" -P -F '#{pane_id}')
+    tmux send-keys -t "$ai2_pane" "$ai2" C-m
+  fi
+
+  tmux send-keys -t "$ai_pane" "$ai" C-m
+  tmux send-keys -t "$editor_pane" "$EDITOR ." C-m
+  tmux select-pane -t "$editor_pane"
+}
+
+# Create multiple tdl windows, one per subdirectory of the current directory.
+# Usage: tdlm <c|cx|codex|other_ai> [<second_ai>]
+tdlm() {
+  [[ -z $1 ]] && { echo "Usage: tdlm <c|cx|codex|other_ai> [<second_ai>]"; return 1; }
+  [[ -z $TMUX ]] && { echo "You must start tmux to use tdlm."; return 1; }
+
+  local ai="$1"
+  local ai2="$2"
+  local base_dir="$PWD"
+  local first=true
+
+  tmux rename-session "$(basename "$base_dir" | tr '.:' '--')"
+
+  for dir in "$base_dir"/*/; do
+    [[ -d $dir ]] || continue
+    local dirpath="${dir%/}"
+
+    if $first; then
+      tmux send-keys -t "$TMUX_PANE" "cd '$dirpath' && tdl $ai $ai2" C-m
+      first=false
+    else
+      local pane_id=$(tmux new-window -c "$dirpath" -P -F '#{pane_id}')
+      tmux send-keys -t "$pane_id" "tdl $ai $ai2" C-m
+    fi
+  done
+}
+
+# Create a multi-pane swarm layout, running the same command in every pane.
+# Usage: tsl <pane_count> <command>
+tsl() {
+  [[ -z $1 || -z $2 ]] && { echo "Usage: tsl <pane_count> <command>"; return 1; }
+  [[ -z $TMUX ]] && { echo "You must start tmux to use tsl."; return 1; }
+
+  local count="$1"
+  local cmd="$2"
+  local current_dir="${PWD}"
+  local -a panes
+
+  tmux rename-window -t "$TMUX_PANE" "$(basename "$current_dir")"
+  panes+=("$TMUX_PANE")
+
+  while (( ${#panes[@]} < count )); do
+    local new_pane
+    local split_target="${panes[-1]}"
+    new_pane=$(tmux split-window -h -t "$split_target" -c "$current_dir" -P -F '#{pane_id}')
+    panes+=("$new_pane")
+    tmux select-layout -t "${panes[0]}" tiled
+  done
+
+  for pane in "${panes[@]}"; do
+    tmux send-keys -t "$pane" "$cmd" C-m
+  done
+
+  tmux select-pane -t "${panes[0]}"
+}
+
+alias ic='tdl c' # Tmux dev layout: editor + omarchy-agent
+alias ix='tdl cx' # Tmux dev layout: editor + Claude (bypass permissions)
+alias icx='tdl c cx' # Tmux dev layout: editor + omarchy-agent + Claude (bypass permissions)
+
+# --- Terminal ---
+alias t='tmux attach || tmux new -s Work' # Attach to tmux, or start a new "Work" session
+alias h='herdr' # Terminal workspace manager for AI coding agents (sessions/tabs/worktrees)
 
 # --- Remote Dev ---
 alias bot-edit='code --new-window --folder-uri "vscode-remote://ssh-remote+root@192.168.1.9/root"' # Open VS Code remotely via SSH to Proxmox host (192.168.1.9)
@@ -45,7 +180,10 @@ alias vpn-status='wg show' # Show WireGuard status for all interfaces
 # alias vpn-stop='sudo wg-quick down wg0' # Stop WireGuard on interface wg0
 # alias vpn-restart='sudo wg-quick down wg0 && sudo wg-quick up wg0' # Restart WireGuard on wg0
 
-# --- Commands ---
+# --- Mise ---
+alias mup='MISE_MINIMUM_RELEASE_AGE=0 mise up' # Upgrade mise tools bypassing the minimum release age
+
+# --- Firewall / dev ports ---
 # fixnet removed: automated by the udev rule + /usr/local/bin/fixnet-flap.sh
 # (see system/udev/99-ethernet-fix.rules) - the USB-C ethernet adapter now
 # flaps itself a few seconds after plug-in.
@@ -71,14 +209,6 @@ alias mdocs='mkdir -p "$HOME/Documents" && cd "$HOME/Documents" && micro'
 
 # --- SSH connections ---
 alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@100.104.219.13'
-
-# --- AI cli ---
-alias codex-r='codex resume'
-alias claude-r='claude --resume'
-alias codex-b='codex --dangerously-bypass-approvals-and-sandbox'
-alias claude-b='claude --dangerously-skip-permissions'
-alias codex-rb='codex resume --dangerously-bypass-approvals-and-sandbox'
-alias claude-rb='claude --resume --dangerously-skip-permissions'
 
 # --- Hyprland plugins ---
 alias hyprfix='hyprpm update && hyprpm reload' # Rebuild/reload hyprpm plugins after a Hyprland version bump

@@ -144,7 +144,10 @@ Item {
   }
 
   function updateCommand(kind, agentIds) {
-    var command = ["omarchy-agent-usage-update"]
+    // Quickshell's inherited PATH places the packaged Omarchy commands before
+    // ~/.local/bin. Use the user-owned collector explicitly so compatibility
+    // fixes survive without changing /usr/share/omarchy.
+    var command = [home + "/.local/bin/omarchy-agent-usage-update"]
     if (kind === "force") command.push("--force")
     if (kind === "limits") command.push("--limits-only")
     var providers = settings && settings.providers ? settings.providers : {}
