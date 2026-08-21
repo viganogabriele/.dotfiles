@@ -177,8 +177,8 @@ alias day="pkill hyprsunset" # Disable night mode by stopping hyprsunset
 # --- VPN ---
 alias vpn-start='~/.dotfiles/personal/scripts/vpn/wg-start-auto.sh' # Start WireGuard VPN via auto-start script
 alias vpn-status='wg show' # Show WireGuard status for all interfaces
-# alias vpn-stop='sudo wg-quick down wg0' # Stop WireGuard on interface wg0
-# alias vpn-restart='sudo wg-quick down wg0 && sudo wg-quick up wg0' # Restart WireGuard on wg0
+alias vpn-stop='sudo wg-quick down wg0' # Stop WireGuard on interface wg0
+alias vpn-restart='sudo wg-quick down wg0 && sudo wg-quick up wg0' # Restart WireGuard on wg0
 
 # --- Mise ---
 alias mup='MISE_MINIMUM_RELEASE_AGE=0 mise up' # Upgrade mise tools bypassing the minimum release age
@@ -209,6 +209,3 @@ alias mdocs='mkdir -p "$HOME/Documents" && cd "$HOME/Documents" && micro'
 
 # --- SSH connections ---
 alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@100.104.219.13'
-
-# --- Hyprland plugins ---
-alias hyprfix='hyprpm update && hyprpm reload' # Rebuild/reload hyprpm plugins after a Hyprland version bump
