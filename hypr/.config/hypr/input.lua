@@ -5,16 +5,16 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Variables/#input
 hl.config({
   input = {
-    -- US (international, for accented letters via ' and ` dead keys) + IT.
-    -- Switch between them with Caps Lock (grp:caps_toggle).
+    -- IT (default on boot) + US (international, for accented letters via
+    -- ' and ` dead keys). Switch between them with Caps Lock (grp:caps_toggle).
     -- NOTE: previously "grp:alts_toggle" (Left Alt + Right Alt), but that
     -- option grabs the Right Alt key so it can no longer act as AltGr on
     -- the IT layout, breaking AltGr+o (@) and other AltGr symbols.
     -- Then tried "grp:alt_shift_toggle" (Left Alt + Left Shift), but that
     -- combo gets hit accidentally during normal typing/shortcuts, causing
     -- the layout to switch on its own.
-    kb_layout = "us,it",
-    kb_variant = "intl,",
+    kb_layout = "it,us",
+    kb_variant = ",intl",
     kb_options = "grp:caps_toggle",
 
     -- Change speed of keyboard repeat.
