@@ -7,6 +7,6 @@
 [submodule "kdeconnect/.config/omarchy/plugins/io.github.viganogabriele.kdeconnect-iphone"]
 	path = kdeconnect/.config/omarchy/plugins/io.github.viganogabriele.kdeconnect-iphone
 	url = git@github.com:viganogabriele/kdeconnect-iphone.git
-[submodule "notes/.config/omarchy/plugins/io.github.viganogabriele.omanote-plus"]
-	path = notes/.config/omarchy/plugins/io.github.viganogabriele.omanote-plus
-	url = git@github.com:viganogabriele/omanote-plus.git
+[submodule "notes/.config/omarchy/plugins/io.github.viganogabriele.fast-note-todo"]
+	path = notes/.config/omarchy/plugins/io.github.viganogabriele.fast-note-todo
+	url = git@github.com:viganogabriele/fast-note-todo.git
