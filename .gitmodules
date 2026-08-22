@@ -10,3 +10,6 @@
 [submodule "notes/.config/omarchy/plugins/io.github.viganogabriele.fast-note-todo"]
 	path = notes/.config/omarchy/plugins/io.github.viganogabriele.fast-note-todo
 	url = git@github.com:viganogabriele/fast-note-todo.git
+[submodule "agents/.config/omarchy/plugins/io.github.viganogabriele.unified-agent-watcher"]
+	path = agents/.config/omarchy/plugins/io.github.viganogabriele.unified-agent-watcher
+	url = git@github.com:viganogabriele/unified-agent-watcher.git
