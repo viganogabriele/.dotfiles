@@ -27,7 +27,6 @@ cups
 cups-browsed
 cups-filters
 cups-pdf
-cursor-bin
 ddcutil
 discord
 docker
@@ -38,6 +37,7 @@ dotnet-runtime
 dotnet-runtime-9.0
 dua-cli
 efibootmgr
+elephant-calc
 ethtool
 evince
 exfatprogs
@@ -49,8 +49,8 @@ fcitx5
 fcitx5-gtk
 fcitx5-qt
 fd
-featherpad
 ffmpegthumbnailer
+figlet
 flatpak
 fontconfig
 foot
@@ -63,6 +63,7 @@ gimp
 git
 github-cli
 gitleaks
+gnome-calculator
 gnome-disk-utility
 gnome-keyring
 gnome-themes-extra
@@ -137,16 +138,16 @@ noto-fonts-emoji
 noto-fonts-extra
 npm
 nss-mdns
-obsidian
 obs-studio
+obsidian
 ollama
-omacalc
 omacut
 omarchy
 omarchy-keyring
 omarchy-nvim
 omarchy-settings
 omawrite
+openai-codex-desktop
 openbsd-netcat
 pacman-contrib
 pamixer
@@ -193,6 +194,7 @@ stow
 sushi
 system-config-printer
 tailscale
+tcpdump
 telegram-desktop
 tensaku
 termdown
