@@ -75,7 +75,7 @@ This repo uses **Gitleaks** to prevent accidentally pushing sensitive data (API 
 
 ### 📁 Project Structure
 
-* **`hypr/`, `agents/`, `ghostty/`, `shibumi-ui/`, `uwsm/`, `xcompose/`**: Core application configurations and shared Omarchy QML components managed via Stow.
+* **`hypr/`, `agents/`, `ghostty/`, `uwsm/`, `xcompose/`**: Core application configurations managed via Stow.
 * **`waybar/`, `walker/`, `swayosd/`**: Retired by the Omarchy 4 "Quattro" upgrade (see below) — kept in the repo for reference, no longer stowed.
 * **`zsh/`**: Zsh environment, Oh My Zsh, and custom plugins.
 * **`personal/`**: Your custom scripts (like the system and DNS menus).
