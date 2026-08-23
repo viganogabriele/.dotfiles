@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body {
+    width:${CANVAS_W}px; height:${CANVAS_H}px; overflow:hidden;
+    background:${COLOR_BG};
+    font-family:'Space Grotesk', sans-serif;
+  }
+  .bg {
+    position:absolute; inset:0; width:${CANVAS_W}px; height:${CANVAS_H}px;
+    background:
+      radial-gradient(560px 420px at 90% 6%, ${COLOR_ACCENT2}26, ${COLOR_ACCENT2}00 70%),
+      radial-gradient(760px 560px at 6% 102%, ${COLOR_ACCENT1}22, ${COLOR_ACCENT1}00 70%),
+      linear-gradient(160deg, ${COLOR_BG} 0%, ${COLOR_SURFACE} 55%, ${COLOR_BG} 100%);
+  }
+  /* faint vertical rule grid, echoing the site's own graph-paper texture */
+  .grid {
+    position:absolute; inset:0; width:${CANVAS_W}px; height:${CANVAS_H}px;
+    background-image: linear-gradient(90deg, ${COLOR_ACCENT1}0d 1px, transparent 1px);
+    background-size: 64px 100%;
+    mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 80%, transparent);
+  }
+  .wrap { position:relative; width:${CANVAS_W}px; height:${CANVAS_H}px; padding:${PAD_Y}px ${PAD_X}px; }
+
+  .label {
+    color:${COLOR_ACCENT1}; font-family:'Space Mono', monospace; font-size:12px; letter-spacing:3.5px; font-weight:700;
+    text-transform:uppercase;
+  }
+  .label .sep { color:${COLOR_ACCENT2}; }
+
+  .credit {
+    margin-top:6px; font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.3px;
+    color:${COLOR_MUTED};
+  }
+  .credit a { color:${COLOR_MUTED}; }
+
+  h1 {
+    color:${COLOR_TEXT}; font-size:${HEADLINE_SIZE}px; line-height:1.16; font-weight:700;
+    margin-top:20px; letter-spacing:-0.5px;
+  }
+  h1 .accent { color:${COLOR_ACCENT1}; }
+
+  p.desc {
+    color:${COLOR_MUTED2}; font-size:15px; line-height:1.62; margin-top:18px;
+    max-width:${DESC_WIDTH}px;
+  }
+
+  ul.features { margin-top:22px; list-style:none; max-width:${DESC_WIDTH}px; }
+  ul.features li {
+    color:${COLOR_TEXT2}; font-size:14.5px; line-height:1.85;
+    padding-left:20px; position:relative;
+  }
+  ul.features li::before {
+    content: "\203a"; position:absolute; left:0; color:${COLOR_ACCENT1}; font-weight:700;
+  }
+  ul.features li b { color:${COLOR_TEXT}; font-weight:600; }
+
+  .footer {
+    position:absolute; left:${PAD_X}px; bottom:${PAD_Y}px;
+    font-family:'Space Mono', monospace; font-size:13px; color:${COLOR_MUTED};
+    display:flex; align-items:center; gap:10px;
+  }
+  .footer b {
+    color:${COLOR_CMD_TEXT}; background:${COLOR_ACCENT2}22; padding:4px 10px; border-radius:5px;
+  }
+  .footer .sep { color:${COLOR_MUTED}; opacity:0.5; }
+  .footer .repo { color:${COLOR_MUTED2}; }
+
+  .right {
+    position:absolute; right:${RIGHT_MARGIN}px; top:0; height:${CANVAS_H}px; width:${RIGHT_W}px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:${STACK_GAP}px;
+  }
+
+  /* the hero shot: rendered larger and with a brighter border than anything
+     below it, so it reads as the primary visual, not a same-weight sibling */
+  .hero-card {
+    border-radius:14px; border:2px solid ${COLOR_ACCENT1};
+    box-shadow: 0 0 0 1px ${COLOR_ACCENT1}26, 0 24px 60px rgba(0,0,0,0.55), 0 0 46px ${COLOR_ACCENT1}33;
+    background:linear-gradient(145deg, ${COLOR_SURFACE}, ${COLOR_BG}f0);
+    padding:${HERO_PAD}px ${HERO_PAD}px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-card img { display:block; width:${HERO_W}px; height:auto; }
+
+  .hero-caption {
+    font-family:'Space Mono', monospace; font-size:12px; color:${COLOR_MUTED};
+    text-align:center; max-width:${RIGHT_W}px; line-height:1.5;
+  }
+  .hero-caption b { color:${COLOR_ACCENT1}; }
+
+  .panels-row { display:flex; gap:16px; align-items:flex-end; }
+  .panel-card {
+    border-radius:12px; border:1.25px solid ${COLOR_ACCENT2}88;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+    background:${COLOR_SURFACE}; overflow:hidden;
+  }
+  .panel-card img { display:block; height:${PANEL_H}px; width:auto; }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="grid"></div>
+  <div class="wrap">
+    <div class="label">${CATEGORY} <span class="sep">/</span> ${AUTHOR}</div>
+    <div class="credit">${CREDIT_LINE}</div>
+    <h1>${HEADLINE_HTML}</h1>
+    <p class="desc">${DESCRIPTION_HTML}</p>
+    <ul class="features">
+      ${BULLETS_HTML}
+    </ul>
+    <div class="footer">
+      <b>${FOOTER_CMD}</b><span class="sep">&middot;</span><span class="repo">${FOOTER_REPO}</span>
+    </div>
+    <div class="right">
+      <div class="hero-card"><img src="${HERO_IMG_SRC}"></div>
+      <div class="hero-caption">${HERO_CAPTION_HTML}</div>
+      <div class="panels-row">
+        ${PANELS_HTML}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
