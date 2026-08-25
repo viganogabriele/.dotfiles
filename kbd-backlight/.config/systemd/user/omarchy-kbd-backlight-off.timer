@@ -1,0 +1,11 @@
+[Unit]
+Description=Turn off keyboard backlight at 08:00
+Requires=omarchy-kbd-backlight-off.service
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=false
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

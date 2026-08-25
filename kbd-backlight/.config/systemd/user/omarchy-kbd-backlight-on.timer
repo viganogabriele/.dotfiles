@@ -1,0 +1,11 @@
+[Unit]
+Description=Turn on keyboard backlight at 19:00
+Requires=omarchy-kbd-backlight-on.service
+
+[Timer]
+OnCalendar=*-*-* 19:00:00
+Persistent=false
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

@@ -43,6 +43,19 @@ Chromium so text stays crisp. Built from doing this for
    icons, other windows, terminal output with private content — crop it out
    or, better, capture on an empty desktop/workspace so there's nothing to
    crop out. See "Capturing clean screenshots" below.
+7. **Mute the chrome, not the content.** Card/panel borders are UI framing,
+   not the message — keep them around 35-45% accent opacity (thin, modest
+   glow). If a border is as bright as the headline or a label, it's
+   competing with the text for attention instead of supporting it. The
+   headline/label color should read as the brightest thing in the image.
+8. **Real crops for real variants, never redrawn ones.** If you need to
+   illustrate several UI states (e.g. three different bar-display modes)
+   and don't have one screenshot per state, look for a single real
+   screenshot where those states already coexist side by side (e.g. three
+   providers each happening to render in a different mode) and crop out
+   each sub-region. That's still "real screenshot only" — cropping isn't
+   redrawing. Only fall back to asking for more screenshots if no existing
+   capture actually contains the state you need.
 
 ## Workflow
 
@@ -69,9 +82,12 @@ Chromium so text stays crisp. Built from doing this for
    won't remove it.
 5. **Write `config.json`** (schema below) with the verified copy, the
    chosen hierarchy, and the cropped image paths.
-6. **Render:**
+6. **Render:** run `generate_hero.py`, which lives alongside this SKILL.md
+   (e.g. `~/.claude/skills/repo-hero/generate_hero.py` for Claude Code,
+   `~/.codex/skills/repo-hero/generate_hero.py` for Codex) — use whichever
+   path this skill was actually loaded from:
    ```bash
-   python3 ~/.claude/skills/repo-hero/generate_hero.py config.json preview.png
+   python3 <this-skill's-directory>/generate_hero.py config.json preview.png
    ```
 7. **Show the result to the user on their own screen** — don't just
    describe it in text:

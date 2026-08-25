@@ -1,0 +1,8 @@
+[Unit]
+Description=Turn off keyboard backlight
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/omarchy/kbd-backlight-schedule.sh off
+LogLevelMax=warning

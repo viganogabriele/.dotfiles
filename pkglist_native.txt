@@ -180,6 +180,7 @@ ripgrep
 ruby
 rust
 sddm
+shellcheck
 signal-desktop
 slurp
 snapper

@@ -1,0 +1,8 @@
+[Unit]
+Description=Turn on keyboard backlight
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/omarchy/kbd-backlight-schedule.sh on
+LogLevelMax=warning
