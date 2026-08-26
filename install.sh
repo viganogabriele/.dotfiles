@@ -5,7 +5,7 @@
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # waybar/walker/swayosd dropped: Omarchy 4 "Quattro" replaced all three with
 # its own Quickshell-based bar/launcher/OSD (see OMARCHY-QUATTRO-MIGRATION.md).
-STOW_FOLDERS=("agents" "battery" "claude-skills" "ghostty" "hypr" "kdeconnect" "notes" "xcompose" "zsh" "personal" "uwsm" "vscode")
+STOW_FOLDERS=("agents" "battery" "claude-skills" "ghostty" "hypr" "kdeconnect" "notes" "omarchy-workspaces" "xcompose" "zsh" "personal" "uwsm" "vscode")
 SEP='\n------------------------------------\n'
 
 # Logging helpers

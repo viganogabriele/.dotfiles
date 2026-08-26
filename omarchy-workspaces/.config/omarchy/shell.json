@@ -1,0 +1,204 @@
+{
+  "bar": {
+    "centerAnchor": "omarchy.clock",
+    "layout": {
+      "center": [
+        {
+          "id": "omarchy.indicators"
+        },
+        {
+          "id": "io.github.viganogabriele.fast-note-todo"
+        },
+        {
+          "id": "pick.screenshot"
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "format": "dddd HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "id": "omarchy.clock",
+          "verticalFormat": "HH\n—\nmm"
+        },
+        {
+          "id": "omarchy.system-update"
+        }
+      ],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "gabriele.workspaces"
+        },
+        {
+          "id": "aislandener.galaxy-buds"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "id": "omaplug"
+        },
+        {
+          "id": "io.github.ajanraj.disposable-email"
+        },
+        {
+          "id": "omarchy.tailscale"
+        },
+        {
+          "id": "jkoestinger.vpn"
+        },
+        {
+          "id": "io.github.viganogabriele.kdeconnect-iphone"
+        },
+        {
+          "id": "io.github.spencerbull.omapilot",
+          "builtinModel": "openai-codex::gpt-5.3-codex-spark",
+          "dangerousAutoApprove": false,
+          "onboardingComplete": true,
+          "provider": "builtin",
+          "ttsModel": "kokoro-82m",
+          "ttsProvider": "kokoro",
+          "ttsVoice": "af_heart",
+          "voiceEnabled": true
+        },
+        {
+          "id": "io.github.viganogabriele.unified-agent-watcher",
+          "blinkOnBlocked": true,
+          "groupingMode": "source",
+          "hideIdle": false,
+          "icon": "robot",
+          "notifications": false,
+          "refreshIntervalSec": 15
+        }
+      ],
+      "right": [
+        {
+          "id": "miseriae.gitarchy",
+          "lazyGitMode": "focus"
+        },
+        {
+          "id": "omarchy.tray"
+        },
+        {
+          "id": "agx.screen-time"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "io.github.viganogabriele.agent-usage-plus",
+          "refreshIntervalSec": 300,
+          "providers": {
+            "claude": {
+              "barLabelMode": "full",
+              "barRole": "fixed",
+              "enabled": true,
+              "primary": false,
+              "showInBar": true
+            },
+            "codex": {
+              "barLabelMode": "full",
+              "barRole": "fixed",
+              "enabled": true,
+              "primary": false,
+              "showInBar": true
+            },
+            "cursor": {
+              "barLabelMode": "icon",
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "deepseek": {
+              "barLabelMode": "icon",
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "fireworks": {
+              "barLabelMode": "icon",
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "gemini": {
+              "barLabelMode": "icon",
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "kimi": {
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "openrouter": {
+              "barLabelMode": "icon",
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "xai": {
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            },
+            "zai": {
+              "barRole": "fixed",
+              "enabled": false,
+              "primary": false,
+              "showInBar": false
+            }
+          },
+          "barMode": "all",
+          "warnThresholdPct": 75,
+          "criticalThresholdPct": 90,
+          "barLabelMode": "full",
+          "barCycleSlots": 1,
+          "barCycleIntervalSec": 3,
+          "notificationsEnabled": true,
+          "testkey": null,
+          "providerOrder": "[\"claude\",\"codex\",\"cursor\"]"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "crmne.hyprmoncfg"
+        },
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power",
+          "showPercentage": true
+        },
+        {
+          "id": "hamsti.vitals",
+          "display": "CPU"
+        }
+      ]
+    },
+    "position": "top",
+    "transparent": true
+  },
+  "idle": {
+    "lock": 300,
+    "screensaver": 150
+  },
+  "plugins": [],
+  "version": 1
+}
