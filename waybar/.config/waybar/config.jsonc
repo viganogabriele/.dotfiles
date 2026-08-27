@@ -20,7 +20,6 @@
   ],
   "modules-right": [
     "custom/separator-right",
-    "custom/codexbar-usage",
     "group/tray-expander",
     "bluetooth",
     "network",
@@ -235,14 +234,5 @@
   "tray": {
     "icon-size": 12,
     "spacing": 17
-  },
-  "custom/codexbar-usage": {
-    "exec": "/home/gabriele/.config/waybar/scripts/codexbar-usage.sh",
-    "return-type": "json",
-    "interval": 300,
-    "tooltip": true,
-    "escape": false,
-    "format": "{}",
-    "on-click": "omarchy-launch-floating-terminal-with-presentation /home/gabriele/.config/waybar/scripts/codexbar-usage-details.sh"
   }
 }

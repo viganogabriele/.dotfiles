@@ -242,6 +242,20 @@ if [[ -f "$DOTFILES/system/udev/99-ethernet-fix.rules" ]]; then
     sudo udevadm control --reload-rules
 fi
 
+# --- 9c. mise-managed Python: ensure setuptools (distutils shim) ---
+# mise's python builds ship with pip only, no setuptools. `g-ir-scanner`
+# (used by AUR builds like cogl/clutter) does `import distutils`, which
+# fails with ModuleNotFoundError unless setuptools' distutils shim is
+# present — and since mise's python3 shim sits ahead of /usr/bin/python3 in
+# PATH, that breaks those builds even though the system python is fine.
+if command -v mise &> /dev/null; then
+    mise_python="$(mise which python3 2>/dev/null || true)"
+    if [[ -n "$mise_python" ]] && ! "$mise_python" -c "import distutils" &>/dev/null; then
+        log "Installing setuptools into mise's Python ($mise_python) for distutils..."
+        "$mise_python" -m pip install --quiet setuptools
+    fi
+fi
+
 # --- 10. Finalization ---
 log "Finalizing system configuration..."
 chmod +x "$DOTFILES/sync.sh" "$DOTFILES/refresh_lists.sh"

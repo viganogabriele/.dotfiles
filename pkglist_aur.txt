@@ -2,7 +2,6 @@ android-studio
 antigravity
 brave-bin
 cheese
-codexbar-cli
 galaxybudsclient-bin
 gnome-network-displays
 hyprmoncfg
