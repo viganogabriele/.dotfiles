@@ -98,12 +98,19 @@ if [[ -n "$ORPHANS" ]]; then
         echo "  - $pkg  ($desc)"
     done
     warn "Some of these may be legitimate to THIS machine (drivers, firmware) rather than truly obsolete."
-    read -r -p "Remove them now with pacman -Rns? [y/N] " reply
-    if [[ "$reply" =~ ^[Yy]$ ]]; then
-        # shellcheck disable=SC2086
-        sudo pacman -Rns $ORPHANS
+    if [[ -t 0 ]]; then
+        read -r -p "Remove them now with pacman -Rns? [y/N] " reply
+        if [[ "$reply" =~ ^[Yy]$ ]]; then
+            # shellcheck disable=SC2086
+            sudo pacman -Rns $ORPHANS
+        else
+            log "Skipped removal."
+        fi
     else
-        log "Skipped removal."
+        # No interactive stdin (e.g. run by an agent/non-interactive tool) —
+        # never block waiting for input that will never arrive. Just list
+        # them (above) and move on; re-run in a real terminal to prune.
+        warn "Not an interactive terminal — skipping removal prompt. Re-run in a real terminal to prune these."
     fi
 else
     log "No orphan packages found."
