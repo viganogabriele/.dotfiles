@@ -213,3 +213,6 @@ alias mdocs='mkdir -p "$HOME/Documents" && cd "$HOME/Documents" && micro'
 
 # --- SSH connections ---
 alias oracle='ssh -i ~/.ssh/oracle_ampere.key -o ServerAliveInterval=30 -o ServerAliveCountMax=3 ubuntu@100.104.219.13'
+
+# --- CV ---
+alias cv-make='docker run --rm --user $(id -u):$(id -g) -v "$PWD":/doc -w /doc texlive/texlive:latest make'

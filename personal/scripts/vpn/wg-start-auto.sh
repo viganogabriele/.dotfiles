@@ -1,16 +1,16 @@
 #!/bin/bash
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
+# da correggere tutto il codice
 
 
 # --- ENV ---
-TELEGRAM_TOKEN=os.getenv("TELEGRAM_TOKEN") 
-CHAT_ID=os.getenv("CHAT_ID")             
-COMMAND_START=os.getenv("COMMAND_START")
-WAIT_TIME=int(os.getenv("WAIT_TIME"))
-INTERFACE=os.getenv("INTERFACE")
+ENV_FILE="$(dirname "$0")/.env"
+
+if [ -f "$ENV_FILE" ]; then
+    export $(grep -v '^#' "$ENV_FILE" | xargs)
+else
+    echo "!!! File .env non trovato in $ENV_FILE"
+    exit 1
+fi
 # ----------------------
 
 echo "--> Invio comando di avvio ('${COMMAND_START}') al bot Telegram..."
