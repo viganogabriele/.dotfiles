@@ -1,0 +1,10 @@
+agx.screen-time https://github.com/ax1g/quickshell-screentime-plugin.git
+aislandener.galaxy-buds https://github.com/aislandener/galaxy-buds-control.git
+crmne.hyprmoncfg https://github.com/crmne/omarchy-hyprmoncfg.git
+hamsti.vitals https://github.com/thehamsti/omarchy-vitals.git
+io.github.ajanraj.disposable-email https://github.com/ajanraj/omarchy-disposable-email.git
+io.github.spencerbull.omapilot https://github.com/spencerbull/omarchy-omapilot.git
+jkoestinger.vpn https://github.com/jkoestinger/omarchy-vpn.git
+miseriae.gitarchy https://github.com/miseriae/gitarchy.git
+omaplug https://github.com/fross100/omaplug
+pick.screenshot https://github.com/nightdevil00/pick.screenshot.git

@@ -87,6 +87,22 @@ this machine have a battery? a keyboard backlight?), detect it directly in
 `install.sh` (e.g. `/sys/class/power_supply/BAT*`) rather than a hostname
 check — it's correct on a third machine without any edits.
 
+## Plugins, webapps, and other non-config things
+
+Not everything worth reproducing on both machines is a dotfile:
+
+- Marketplace Omarchy plugins (not authored by the user — check
+  `git remote get-url origin` inside `~/.config/omarchy/plugins/<id>`; ours
+  contain "viganogabriele" or have no remote at all) are tracked in
+  `pkglist_omarchy_plugins.txt`, refreshed by `refresh_lists.sh`, installed
+  by `install.sh` via `omarchy plugin add <url> --enable --yes`. Never add a
+  URL to that file without having looked at what the plugin actually does —
+  `--yes` skips the normal "this runs unsandboxed code" confirmation.
+- Omarchy web-app shortcuts (`.desktop` files made by `omarchy-webapp-install`)
+  aren't packages and aren't in any pkglist — they won't show up as
+  "orphans" in the pacman prune step even when stale. Handle them with
+  `omarchy-webapp-remove` directly, not through this repo.
+
 ## Secrets discipline
 
 Never commit: API keys/tokens, `gh/hosts.yml`, SSH/GPG private keys,

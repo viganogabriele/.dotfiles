@@ -24,5 +24,25 @@ else
     log "VS Code not found, skipping extension list."
 fi
 
+# Save third-party Omarchy plugins (marketplace, installed via `omarchy plugin
+# add <git-url>`) as "id url" pairs, so install.sh can reinstall them
+# elsewhere. Excludes our own plugins: those are tracked directly as stow
+# packages/submodules (agents/, kdeconnect/, notes/, omarchy-workspaces/), not
+# through this list.
+PLUGINS_DIR="$HOME/.config/omarchy/plugins"
+if [[ -d "$PLUGINS_DIR" ]]; then
+    : > "$DOTFILES/pkglist_omarchy_plugins.txt"
+    for d in "$PLUGINS_DIR"/*/; do
+        id="$(basename "${d%/}")"
+        [[ "$id" == "gabriele.workspaces" ]] && continue
+        url="$(git -C "$d" remote get-url origin 2>/dev/null || true)"
+        [[ -z "$url" ]] && continue
+        [[ "$url" == *viganogabriele* ]] && continue
+        echo "$id $url" >> "$DOTFILES/pkglist_omarchy_plugins.txt"
+    done
+    sort -o "$DOTFILES/pkglist_omarchy_plugins.txt" "$DOTFILES/pkglist_omarchy_plugins.txt"
+    log "Third-party Omarchy plugin list updated."
+fi
+
 log "All lists updated successfully in $DOTFILES."
 echo "------------------------------------"

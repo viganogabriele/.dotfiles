@@ -101,6 +101,34 @@ Everything else — binds, aliases, plugins, shell config, editor config — is
 byte-identical between the two machines by construction (it's the same
 symlinked file).
 
+## 🔌 Omarchy plugins
+
+Two different things live under `~/.config/omarchy/plugins/`:
+
+- **Plugins I wrote** (`io.github.viganogabriele.*`, `gabriele.workspaces`) —
+  tracked as regular stow packages/submodules (`agents/`, `kdeconnect/`,
+  `notes/`, `omarchy-workspaces/`), same as everything else in this repo.
+- **Marketplace plugins from other authors** (OmaPilot, Vitals, Gitarchy,
+  etc.) — these aren't config, they're separately-installed third-party
+  code, so they're tracked the same way as pacman packages: `refresh_lists.sh`
+  snapshots the installed ones (id + git URL) into
+  `pkglist_omarchy_plugins.txt`, and `install.sh` runs
+  `omarchy plugin add <url> --enable --yes` for any missing from that list.
+  Already-installed plugins are never touched (no re-clone, no state reset).
+
+  **Trust note**: `omarchy plugin add` normally warns that plugins run as
+  unsandboxed code and asks for confirmation before cloning. `install.sh`
+  skips that prompt (`--yes`) on the assumption that every URL in
+  `pkglist_omarchy_plugins.txt` was already reviewed once, by hand, on the
+  machine that installed it originally. Don't add a plugin URL to this file
+  (or run `omarchy plugin add` non-interactively) without having actually
+  looked at what it does first.
+
+**Apps that aren't packages or plugins**: Omarchy web-app shortcuts (Discord,
+ChatGPT-as-app, etc.) are just `.desktop` files, invisible to both the
+pacman prune step and the plugin list. Manage those directly with
+`omarchy-webapp-remove` / `omarchy-webapp-install`.
+
 ## 🗑️ Removing obsolete packages
 
 When a machine has drifted (e.g. the desktop still had Omarchy 3 packages —

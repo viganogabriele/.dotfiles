@@ -168,7 +168,26 @@ if is_in "nvim" "${STOW_FOLDERS[@]}" && [[ -d "$HOME/.config/nvim/lua/plugins" ]
     ln -sfn "$HOME/.local/state/omarchy/current/theme/neovim.lua" "$HOME/.config/nvim/lua/plugins/theme.lua"
 fi
 
-# --- 8c. Laptop-only services ---
+# --- 8c. Third-party Omarchy plugins ---
+# Marketplace plugins (not ours — those are stowed above as regular
+# packages/submodules). Only adds what's missing; never touches one that's
+# already installed, so local enable/disable state and updates aren't
+# clobbered. --yes skips the "plugins run as unsandboxed code" prompt, which
+# is fine here: every URL in this file was already reviewed and installed by
+# hand once, on the machine that captured pkglist_omarchy_plugins.txt.
+if [[ -f "$DOTFILES/pkglist_omarchy_plugins.txt" ]] && command -v omarchy-plugin-add &> /dev/null; then
+    log "Installing third-party Omarchy plugins..."
+    while read -r plugin_id plugin_url; do
+        [[ -z "$plugin_id" ]] && continue
+        if [[ -e "$HOME/.config/omarchy/plugins/$plugin_id" ]]; then
+            continue
+        fi
+        log "Adding plugin: $plugin_id"
+        omarchy-plugin-add "$plugin_url" --enable --yes || warn "Failed to add plugin $plugin_id ($plugin_url)"
+    done < "$DOTFILES/pkglist_omarchy_plugins.txt"
+fi
+
+# --- 8d. Laptop-only services ---
 # Files are linked on every machine (so they can keep being edited/synced
 # from either one); the systemd timers behind them are only enabled where
 # the hardware they act on actually exists.
