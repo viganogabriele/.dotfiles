@@ -1,0 +1,1 @@
+- [Prefer Omarchy official packages](feedback_omarchy_official_packages.md) — use omarchy repo builds over AUR/-git for components Omarchy curates (quickshell case)
