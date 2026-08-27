@@ -50,7 +50,7 @@ commits and pushes — but only if there's actually something to commit.
 **Pull on the other machine:**
 
 ```bash
-cd ~/.dotfiles && ./install.sh
+dotup   # alias for ~/.dotfiles/install.sh
 ```
 
 Since `install.sh` starts with a `git pull` and every step is `--needed` /
