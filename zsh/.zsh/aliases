@@ -59,6 +59,10 @@ alias gstash='git stash -u' # Stash changes including untracked files
 alias gpop='git stash pop' # Apply and drop latest stash
 alias gamend='git commit --amend --no-edit' # Amend last commit without changing the message
 
+# --- Dotfiles sync ---
+alias dotsave='~/.dotfiles/sync.sh' # Commit + push local dotfiles changes to GitHub
+alias dotup='~/.dotfiles/install.sh' # Pull + apply the other machine's dotfiles changes here
+
 # --- Gitleaks (Security) ---
 alias glc='gitleaks detect --log-opts="-1" -v'  # Scan current Git repo for secrets and limit log output to last line (verbose)
 alias gld='gitleaks detect -v'             # Scan entire Git history for secrets (verbose)
