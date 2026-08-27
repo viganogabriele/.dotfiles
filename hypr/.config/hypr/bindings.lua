@@ -51,6 +51,11 @@ o.bind("SUPER + SHIFT + G", "WhatsApp", 'omarchy-launch-or-focus-webapp WhatsApp
 -- Telegram: free key, no default to unbind.
 o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus Telegram")
 
+-- Claude / ChatGPT web: free keys, no default to unbind.
+-- Always opens a new browser window (not focus-if-open).
+o.bind("SUPER + U", "Claude", 'omarchy-launch-webapp "https://claude.ai/new"')
+o.bind("SUPER + I", "ChatGPT", 'omarchy-launch-webapp "https://chatgpt.com/"')
+
 -- Media control using Super + Alt + Arrows.
 -- These were actually bound by default to window-grouping (move window to
 -- group on left/right) -- unbind those first.
