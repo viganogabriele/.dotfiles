@@ -86,9 +86,6 @@
           "id": "agx.screen-time"
         },
         {
-          "id": "omarchy.bluetooth"
-        },
-        {
           "id": "io.github.viganogabriele.agent-usage-plus",
           "refreshIntervalSec": 300,
           "providers": {
@@ -169,6 +166,9 @@
           "notificationsEnabled": true,
           "testkey": null,
           "providerOrder": "[\"claude\",\"codex\",\"cursor\"]"
+        },
+        {
+          "id": "omarchy.bluetooth"
         },
         {
           "id": "omarchy.network"

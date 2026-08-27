@@ -1,0 +1,17 @@
+# Default GNU Stow ignore list, plus our own additions below.
+(^|/)RCS$
+(^|/)\.git$
+(^|/)\.gitignore$
+(^|/)\.gitattributes$
+(^|/)\.gitmodules$
+(^|/)\.svn$
+(^|/)CVS$
+(^|/)\.hg$
+(^|/)\.bzr$
+
+# theme.lua is an absolute symlink into Omarchy's live theme state
+# (~/.local/state/omarchy/current/theme/neovim.lua). GNU Stow refuses to
+# manage package source items that are themselves symlinks ("source is an
+# absolute symlink ... All operations aborted"), so it's excluded here and
+# recreated directly by install.sh after stowing instead.
+(^|/)lua/plugins/theme\.lua$

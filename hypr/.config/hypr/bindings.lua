@@ -76,3 +76,19 @@ for i = 0, 9 do
     move_workspace_windows(workspace)
   end)
 end
+
+-- BEGIN OmaPilot managed hotkeys
+-- Added at the user request from OmaPilot settings. Edit these bindings freely.
+hl.unbind("SUPER + A")
+o.bind("SUPER + A", "Talk to OmaPilot",
+  "omarchy-shell -q io.github.spencerbull.omapilot voiceToggle")
+hl.unbind("SUPER + ALT + X")
+o.bind("SUPER + ALT + X", "Cancel OmaPilot voice mode",
+  "omarchy-shell -q io.github.spencerbull.omapilot voiceCancel")
+hl.unbind("SUPER + ALT + N")
+o.bind("SUPER + ALT + N", "New OmaPilot chat",
+  "omarchy-shell -q io.github.spencerbull.omapilot newChat")
+hl.unbind("SUPER + ALT + H")
+o.bind("SUPER + ALT + H", "Continue OmaPilot chat in Herdr",
+  "omarchy-shell -q io.github.spencerbull.omapilot continueInHerdr")
+-- END OmaPilot managed hotkeys

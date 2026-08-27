@@ -128,6 +128,10 @@ export PATH="$PNPM_HOME/bin:$PATH"
 export PATH="/home/gabriele/.local/bin:$PATH"
 # <<< Codex installer <<<
 
+# STM32CubeProgrammer (CLI e script richiesto dal core STM32 di Arduino)
+export STM32CUBEPROGRAMMER_HOME="$HOME/Apps/stm32"
+export PATH="$STM32CUBEPROGRAMMER_HOME/bin:$PATH"
+
 # Profila con callgrind + kcachegrind un test del progetto-api (uso: profila < file_di_test)
 profila() {
     make main || return 1

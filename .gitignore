@@ -1,2 +1,5 @@
 *.bak
 *.bak.*
+
+# Per-machine overrides — never synced, see the .example file next to each.
+hypr/.config/hypr/monitors.local.lua

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -uo pipefail
 
 # --- Environment Setup ---
 # Use absolute paths to make the script runnable from anywhere

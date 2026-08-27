@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -uo pipefail
 
 # --- Environment Setup ---
 # Get the absolute path of the script directory to ensure portability

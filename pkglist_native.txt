@@ -82,6 +82,7 @@ hyprland-preview-share-picker
 hyprpicker
 hyprsunset
 imagemagick
+img2pdf
 imv
 inetutils
 inotify-tools
@@ -122,7 +123,7 @@ mariadb-libs
 massif-visualizer
 meld
 micro
-mise
+mise-bin
 moonlight-qt
 mpv
 mpv-mpris
@@ -138,8 +139,8 @@ noto-fonts-emoji
 noto-fonts-extra
 npm
 nss-mdns
-obs-studio
 obsidian
+obs-studio
 ollama
 omacut
 omarchy
@@ -151,6 +152,7 @@ openai-codex-desktop
 openbsd-netcat
 pacman-contrib
 pamixer
+pdfarranger
 pinta
 pipewire
 pipewire-alsa
@@ -165,6 +167,7 @@ podman-compose
 postgresql-libs
 power-profiles-daemon
 powertop
+putty
 python-dotenv
 python-gobject
 python-poetry-core
@@ -174,7 +177,7 @@ qemu-full
 qemu-user-static-binfmt
 qrencode
 qt5-wayland
-quickshell-git
+quickshell
 rclone
 ripgrep
 ruby

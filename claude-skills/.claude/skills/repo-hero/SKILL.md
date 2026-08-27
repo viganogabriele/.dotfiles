@@ -129,6 +129,23 @@ Getting a screenshot with nothing but the app on a clean background:
    crop tight to the actual UI element to avoid capturing the wallpaper as
    if it were part of the design.
 
+## Keeping screenshot text legible at hero scale
+
+Real screenshots almost always get scaled down to fit a card in the
+composition, and dense UI text (tables, small labels) can turn mushy at
+that size. Before embedding, boost contrast/brightness a notch — subtle
+enough to still look like a real screenshot, enough to keep text crisp:
+
+```bash
+magick screenshot.png -modulate 100,108,100 -brightness-contrast 6x14 screenshot_boost.png
+```
+
+Use the boosted version as the embedded image, not the original. Bump the
+numbers a bit further (e.g. `-brightness-contrast 8x18`) for very small
+crops (icon-sized) where every pixel of contrast matters. Always compare
+before/after at the actual render size — this is a legibility fix, not a
+style choice; if it starts looking blown out or color-shifted, back off.
+
 ## Brand palette
 
 Pull real values instead of guessing:
@@ -191,6 +208,83 @@ project should look distinctly different from this default.
   the defaults in `generate_hero.py`.
 - See `~/Work/templates/plugin-hero/examples/agent-usage-plus/` for a
   complete worked example (config + cropped screenshots + rendered output).
+
+## Complementary images beyond the main hero
+
+A repo can want more than one image — e.g. `preview.png` as the hero plus
+two supporting images shown side by side further down the README. Treat
+these as a *series*, not N independent heroes:
+
+- Same background/grid/palette/type treatment on every image in the set,
+  so they visibly belong together.
+- Each image does exactly **one** job (e.g. "the full scrollable panel",
+  "the bar + provider switching"). Don't repeat the hero's big
+  headline+description+bullet-list+footer block on every image — that
+  reads as "documentation" three times over, not a coherent set. A
+  complementary image usually just needs: a small discreet mono label
+  (or a one-line headline at most), the screenshot(s), and a few short
+  callouts. Skip the footer/install-command row — that belongs to the
+  main hero only.
+- Never literally duplicate the hero's composition (same crop, same
+  layout) in a second image — reuse the underlying screenshots freely,
+  but give each image its own angle/crop/framing.
+
+## Custom editorial compositions (beyond generate_hero.py's schema)
+
+`generate_hero.py` + `template.html` cover the standard shape: one big
+hero shot, a caption, and a row of equal-height panel cards. That's the
+right tool whenever the composition fits that shape. It stops being
+enough when you need things like:
+
+- A screenshot broken into a *bigger* primary element plus a *small*,
+  clearly-secondary comparison card (overlapping, offset, slightly
+  rotated) instead of a row of equal-weight cards.
+- Callouts that point at a specific region *inside* a screenshot (a
+  table, a chart, a row) rather than just captioning the image as a
+  whole.
+- Two screenshots that need to read as **one continuous thing** — the
+  same panel caught mid-scroll, or two consecutive sections of the same
+  settings screen — rather than two independent windows.
+
+In that case, don't force the config.json schema — write a standalone
+Python script that builds its own HTML and renders it the same way
+`generate_hero.py` does (base64-embed images, `chromium --headless
+--screenshot=...`). Reuse the same palette/background/grid CSS from
+`template.html` so it still looks like part of the same visual system;
+lay out every element with absolute `left/top` pixel positions instead of
+flexbox, since the composition is bespoke. See
+`~/Work/templates/plugin-hero/examples/agent-usage-plus-editorial/` for
+two complete worked examples (panel-scroll continuity, consecutive
+settings sections + real-crop mode examples) including the render
+scripts and their `NOTES.md`.
+
+Reusable motifs from that example, all drawn with a plain SVG overlay
+positioned over the whole canvas:
+
+- **Callout connector** — a short dashed path from a small dot at the
+  edge of a screenshot region to a small dot near the callout text, e.g.
+  `stroke-dasharray="3,4" opacity="0.5"` in `COLOR_ACCENT1`, with a
+  3px-radius `<circle>` at each end. Keep the callout text itself plain
+  bold sans-serif, not mono — mono is for labels/footer, not for reading
+  prose.
+- **"Same thing, continued" connector** — for two screenshots that are
+  really one panel/screen split across the composition: a vertical
+  dashed line down the gap between them (`stroke-dasharray="2,7"`), one
+  or two small chevron (`>`-shaped path) marks along it suggesting
+  direction, and — only when the continuation isn't obvious on its own
+  (e.g. a scroll, as opposed to two settings panels that already look
+  like the same list continuing) — a short mono label like
+  "scroll to explore" centered in the gap.
+- **Overlapping secondary card** — a smaller card positioned with
+  `left/top` so it overlaps one corner of the primary card by ~30-60px,
+  `transform: rotate(2-3deg)`, and a *thinner, more muted* border than
+  the primary. Reads instantly as "secondary, stacked on top of" rather
+  than "equal sibling".
+
+Iterate the same way as the standard flow: render, view the PNG, check
+for text clipped at canvas edges or callouts colliding with each other
+(the most common bug — compute each element's pixel bounds before
+trusting a layout, don't eyeball it), adjust coordinates, re-render.
 
 ## Omarchy marketplace specifics
 

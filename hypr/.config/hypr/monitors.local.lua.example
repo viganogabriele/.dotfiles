@@ -1,0 +1,13 @@
+-- Per-machine overrides for monitors.lua.
+--
+-- Copy this file to monitors.local.lua (same directory) and edit the values
+-- for THIS machine. monitors.local.lua is gitignored on purpose: it never
+-- gets committed or synced, so the laptop's scale never clobbers the
+-- desktop's and vice versa. Every other Hyprland setting stays shared.
+--
+-- Run `hyprctl monitors all` to see what this machine's panel supports.
+
+return {
+  gdk_scale = 1,
+  monitor_scale = 1,
+}
