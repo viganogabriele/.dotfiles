@@ -3,3 +3,6 @@
 
 # Per-machine overrides — never synced, see the .example file next to each.
 hypr/.config/hypr/monitors.local.lua
+
+# Generated live by the hyprmoncfgd daemon per machine — not shared.
+hypr/.config/hypr/hyprmoncfg-monitors.lua
