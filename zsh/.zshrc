@@ -140,3 +140,10 @@ profila() {
     valgrind --tool=callgrind --callgrind-out-file=callgrind.out.tmp ./main > /dev/null
     kcachegrind callgrind.out.tmp
 }
+
+# bun completions
+[ -s "/home/gabriele/.bun/_bun" ] && source "/home/gabriele/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -43,7 +43,7 @@ hl.config({
 -- Logitech M510 mouse: lower its sensitivity.
 hl.device({
   name = "logitech-m510",
-  sensitivity = -0.6,
+  sensitivity = -0.8,
 })
 
 -- App-specific touchpad scroll speeds.

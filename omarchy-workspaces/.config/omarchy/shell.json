@@ -55,7 +55,7 @@
         },
         {
           "id": "io.github.spencerbull.omapilot",
-          "builtinModel": "openai-codex::gpt-5.3-codex-spark",
+          "builtinModel": "openai-codex::gpt-5.6-luna",
           "dangerousAutoApprove": false,
           "onboardingComplete": true,
           "provider": "builtin",
@@ -81,6 +81,9 @@
         },
         {
           "id": "omarchy.tray"
+        },
+        {
+          "id": "roymelgarv.omarchy-downloads"
         },
         {
           "id": "agx.screen-time"

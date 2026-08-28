@@ -8,3 +8,4 @@ jkoestinger.vpn https://github.com/jkoestinger/omarchy-vpn.git
 miseriae.gitarchy https://github.com/miseriae/gitarchy.git
 omaplug https://github.com/fross100/omaplug
 pick.screenshot https://github.com/nightdevil00/pick.screenshot.git
+roymelgarv.omarchy-downloads https://github.com/roymelgarv/omarchy-downloads

@@ -5,8 +5,12 @@ catppuccin.catppuccin-vsc
 enkia.tokyo-night
 esbenp.prettier-vscode
 expo.vscode-expo-tools
+formulahendry.auto-rename-tag
 ivanvilchavskyi.nextgen-md-previewer
+james-yu.latex-workshop
 jovejonovski.ocean-green
+lior-chamla.google-fonts
+mathematic.vscode-latex
 mechatroner.rainbow-csv
 ms-azuretools.vscode-containers
 ms-python.debugpy
@@ -30,3 +34,4 @@ redhat.vscode-yaml
 ritwickdey.liveserver
 rodrigovallades.es7-react-js-snippets
 tomoki1207.pdf
+xabikos.javascriptsnippets

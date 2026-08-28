@@ -22,7 +22,6 @@ chromium
 clang
 cliamp
 cliphist
-cmake
 cups
 cups-browsed
 cups-filters
@@ -37,6 +36,7 @@ dotnet-runtime
 dotnet-runtime-9.0
 dua-cli
 efibootmgr
+egl-wayland
 elephant-calc
 ethtool
 evince
@@ -58,6 +58,7 @@ freerdp
 fuse2
 fwupd
 fzf
+gemini-cli
 ghostty
 gimp
 git
@@ -101,10 +102,12 @@ kernel-modules-hook
 lazydocker
 lazygit
 less
+lib32-nvidia-utils
 libpulse
 libqalculate
 libreoffice-fresh
 libsecret
+libva-nvidia-driver
 libvips
 libvirt
 libyaml
@@ -137,11 +140,13 @@ noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
-npm
 nss-mdns
+nvidia-open-dkms
+nvidia-utils
 obsidian
 obs-studio
 ollama
+omacalc
 omacut
 omarchy
 omarchy-keyring
@@ -177,6 +182,8 @@ qemu-full
 qemu-user-static-binfmt
 qrencode
 qt5-wayland
+qt6-imageformats
+qt6-wayland
 quickshell
 rclone
 ripgrep
@@ -197,6 +204,7 @@ steam
 stow
 sushi
 system-config-printer
+systemd-resolvconf
 tailscale
 tcpdump
 telegram-desktop
@@ -212,7 +220,6 @@ texlive-fontsextra
 texlive-fontsrecommended
 texlive-latex
 texlive-latexextra
-texlive-latexrecommended
 texlive-luatex
 texlive-mathscience
 texlive-xetex
@@ -241,12 +248,13 @@ valgrind
 virt-manager
 virtualbox
 virtualbox-guest-iso
-virtualbox-host-dkms
 visual-studio-code-bin
 voxtype-bin
 vpl-gpu-rt
 vulkan-intel
+waybar
 wev
+wget
 whois
 wine
 wine-mono
