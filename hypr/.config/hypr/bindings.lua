@@ -38,6 +38,9 @@ o.bind("SUPER + SHIFT + C", "Editor", { launch = "code" })
 hl.unbind("SUPER + SHIFT + P") -- was: Google Photos
 o.bind("SUPER + SHIFT + P", "Passwords", { launch = "1password" })
 
+hl.unbind("SUPER + SHIFT + S") -- was: Google Maps
+o.bind("SUPER + SHIFT + S", "Spotify", { launch = "spotify", focus = "spotify" })
+
 hl.unbind("SUPER + SHIFT + D") -- was: Docker
 o.bind("SUPER + SHIFT + D", "T3 Code (Fixed)", 'omarchy-launch-or-focus t3code "t3code-nightly --password-store=gnome-libsecret"')
 
