@@ -48,8 +48,9 @@ o.bind("SUPER + SHIFT + O", "Btop", 'omarchy-launch-or-focus Btop "omarchy-launc
 hl.unbind("SUPER + SHIFT + G") -- was: Signal
 o.bind("SUPER + SHIFT + G", "WhatsApp", 'omarchy-launch-or-focus-webapp WhatsApp "https://web.whatsapp.com/"')
 
--- Telegram: free key, no default to unbind.
-o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus Telegram")
+-- Match Telegram's window class, not a generic title containing "Telegram".
+-- This avoids focusing terminals whose title happens to mention Telegram.
+o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus 'org[.]telegram[.]desktop' Telegram")
 
 -- Claude / ChatGPT web: free keys, no default to unbind.
 -- Always opens a new browser window (not focus-if-open).
