@@ -29,5 +29,14 @@ require("default.hypr.toggles")
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
 
+-- T3 Code is a background worker for me: it must not reclaim focus or change
+-- workspace when Electron sends an activation request. Its workspace is left
+-- untouched and is determined by where it is launched.
+o.window("^t3code$", {
+  no_initial_focus = true,
+  focus_on_activate = false,
+  suppress_event = "activate activatefocus",
+})
+
 -- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
 dofile(os.getenv("HOME") .. "/.config/hypr/hyprmoncfg-monitors.lua")

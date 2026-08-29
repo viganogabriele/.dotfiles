@@ -42,7 +42,7 @@ hl.unbind("SUPER + SHIFT + S") -- was: Google Maps
 o.bind("SUPER + SHIFT + S", "Spotify", { launch = "spotify", focus = "spotify" })
 
 hl.unbind("SUPER + SHIFT + D") -- was: Docker
-o.bind("SUPER + SHIFT + D", "T3 Code (Fixed)", 'omarchy-launch-or-focus t3code "t3code-nightly --password-store=gnome-libsecret"')
+o.bind("SUPER + SHIFT + D", "T3 Code (background)", "t3code-launch-if-missing")
 
 hl.unbind("SUPER + SHIFT + O") -- was: Obsidian
 o.bind("SUPER + SHIFT + O", "Btop", 'omarchy-launch-or-focus Btop "omarchy-launch-tui btop"')

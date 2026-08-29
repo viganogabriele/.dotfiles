@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Start T3 Code only when it is not already running.  In particular, do not
+# use omarchy-launch-or-focus here: that command intentionally changes the
+# active workspace to the existing T3 window.
+if hyprctl clients -j 2>/dev/null | jq -e 'any(.[]; (.class | test("^t3code$"; "i")))' >/dev/null 2>&1; then
+  exit 0
+fi
+
+if pgrep -f '/opt/t3code-nightly-bin/t3code' >/dev/null 2>&1; then
+  exit 0
+fi
+
+exec setsid uwsm-app -- t3code-nightly --password-store=gnome-libsecret
