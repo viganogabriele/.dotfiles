@@ -10,6 +10,7 @@
 # io.github.viganogabriele.agent-usage-plus/collectors/bin/omarchy-agent-usage-codex-cost).
 
 USAGE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/agents/usage"
+COLLECTOR_BIN="${AGENT_USAGE_PLUS_COLLECTOR_BIN:-${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/io.github.viganogabriele.agent-usage-plus/collectors/bin}"
 mkdir -p "$USAGE_DIR"
 
 flags=()
@@ -41,8 +42,15 @@ wanted() {
 
 collect() {
   local collector="$1" agent="$2"
+  shift 2
+  local -a collector_env=("$@")
   local record tmp
-  if ! record=$("$collector" "${flags[@]}") || [[ -z $record ]] || ! jq -e . >/dev/null 2>&1 <<<"$record"; then
+  if ((${#collector_env[@]} > 0)); then
+    record=$(env "${collector_env[@]}" "$collector" "${flags[@]}") || true
+  else
+    record=$("$collector" "${flags[@]}") || true
+  fi
+  if [[ -z $record ]] || ! jq -e . >/dev/null 2>&1 <<<"$record"; then
     echo "omarchy-agent-usage-update: $agent collector failed" >&2
     return 1
   fi
@@ -57,10 +65,22 @@ for collector in "$OMARCHY_PATH"/bin/omarchy-agent-usage-*; do
   agent="${collector##*/omarchy-agent-usage-}"
   [[ $agent == "update" ]] && continue
   wanted "$agent" || continue
+  base_collector="$collector"
   if [[ $agent == "codex" && -x "$HOME/.local/bin/agent-usage-plus-base-codex" ]]; then
     collector="$HOME/.local/bin/agent-usage-plus-base-codex"
   fi
-  collect "$collector" "$agent" &
+  cost_collector="$COLLECTOR_BIN/omarchy-agent-usage-$agent-cost"
+  collector_env=()
+  if [[ -x $cost_collector ]]; then
+    case "$agent" in
+      claude) collector_env=("AGENT_USAGE_PLUS_CLAUDE_BASE_COLLECTOR=$base_collector") ;;
+      codex) collector_env=("AGENT_USAGE_PLUS_CODEX_BASE_COLLECTOR=$collector") ;;
+    esac
+    if ((${#collector_env[@]} > 0)); then
+      collector="$cost_collector"
+    fi
+  fi
+  collect "$collector" "$agent" "${collector_env[@]}" &
   pids+=($!)
 done
 
