@@ -1,4 +1,4 @@
-{ "workbench.colorTheme": "Catppuccin Mocha",
+{ "workbench.colorTheme": "Hackerman",
     "keyboard.dispatch": "keyCode",
     // --- BIOME & GENERAL FORMATTING ---
     // Set Biome as the default formatter for supported files (JS, TS, JSON, etc.)

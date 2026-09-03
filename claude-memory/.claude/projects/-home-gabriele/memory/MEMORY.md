@@ -1,1 +1,5 @@
 - [Prefer Omarchy official packages](feedback_omarchy_official_packages.md) — use omarchy repo builds over AUR/-git for components Omarchy curates (quickshell case)
+- [HackTrack-EU repo context](project_hacktrack.md) — fork of lorenzopalaia's repo, user weighing detach/rebrand since it's all his work now
+- [Orchestrator-only workflow](feedback_orchestrator_workflow.md) — user wants Claude to launch codex/gpt-5.6-luna agents on worktrees, review+merge, not code directly
+- [Agents must not push to main](feedback_agent_no_direct_push.md) — always forbid merge/push in every worker brief; HackTrack-EU main has no branch protection
+- [Don't wrap Skill calls in a fork](feedback_no_fork_wrapping_skill.md) — call Skill (e.g. code-review) directly; a fork wrapper can drift into unsupervised action

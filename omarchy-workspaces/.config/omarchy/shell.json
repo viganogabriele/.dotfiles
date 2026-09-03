@@ -33,6 +33,9 @@
           "id": "gabriele.workspaces"
         },
         {
+          "id": "quickshell.spotify"
+        },
+        {
           "id": "aislandener.galaxy-buds"
         },
         {
@@ -128,7 +131,7 @@
               "showInBar": false
             },
             "gemini": {
-              "barLabelMode": "icon",
+              "barLabelMode": "full",
               "barRole": "fixed",
               "enabled": false,
               "primary": false,
@@ -168,7 +171,9 @@
           "barCycleIntervalSec": 3,
           "notificationsEnabled": true,
           "testkey": null,
-          "providerOrder": "[\"claude\",\"codex\",\"cursor\"]"
+          "providerOrder": "[\"claude\",\"codex\"]",
+          "colorfulUsageMeters": false,
+          "showAvailablePercentage": false
         },
         {
           "id": "omarchy.bluetooth"
