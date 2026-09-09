@@ -60,6 +60,11 @@ o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus 'org[.]telegram
 o.bind("SUPER + U", "Claude", 'omarchy-launch-webapp "https://claude.ai/new"')
 o.bind("SUPER + I", "ChatGPT", 'omarchy-launch-webapp "https://chatgpt.com/"')
 
+-- Claude Code / Codex CLI, mirroring SUPER+U / SUPER+I above but for the
+-- terminal agents. Same bypass flags as the cx/cy shell aliases.
+o.bind("SUPER + SHIFT + U", "Claude Code", "omarchy-launch-tui claude --permission-mode bypassPermissions")
+o.bind("SUPER + SHIFT + I", "Codex", "omarchy-launch-tui codex -s danger-full-access -a never")
+
 -- Media control using Super + Alt + Arrows.
 -- These were actually bound by default to window-grouping (move window to
 -- group on left/right) -- unbind those first.

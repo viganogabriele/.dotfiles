@@ -18,15 +18,27 @@ BarWidget {
   }
 
   function workspaceIds() {
-    var ids = [1, 2, 3, 4, 5]
-    var values = Hyprland.workspaces.values
-
-    for (var i = 0; i < values.length; i++) {
-      var id = values[i].id
-      if (id > 0 && id <= 10 && ids.indexOf(id) === -1) ids.push(id)
+    // Occupancy must come from actual windows (toplevels), not from
+    // Hyprland.workspaces.values -- Hyprland keeps "ghost" workspace objects
+    // around after their last window closes, so existence alone is not a
+    // reliable occupied signal. Show 1..N, where N is the highest occupied
+    // workspace (or the focused one, so the current empty workspace stays
+    // visible) -- no trailing pills past that.
+    var top = 0
+    var tops = Hyprland.toplevels ? Hyprland.toplevels.values : []
+    for (var i = 0; i < tops.length; i++) {
+      var t = tops[i]
+      var ws = t ? t.workspace : null
+      var id = ws ? Number(ws.id) : NaN
+      if (id > 0 && id > top) top = id
     }
 
-    ids.sort(function(left, right) { return left - right })
+    var focused = Hyprland.focusedWorkspace
+    if (focused && focused.id > top) top = focused.id
+    if (top < 1) top = 1
+
+    var ids = []
+    for (var n = 1; n <= top; n++) ids.push(n)
     return ids
   }
 
@@ -75,21 +87,41 @@ BarWidget {
     Repeater {
       model: root.displayedWorkspaceIds
 
-      WidgetButton {
+      Item {
+        id: cell
         required property int modelData
 
         readonly property var workspace: root.workspaceById(modelData)
         readonly property bool occupied: workspace !== null && workspace.toplevels.values.length > 0
         readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
 
-        bar: root.bar
-        text: focused ? "\uDB85\uDCFB" : (modelData === 10 ? "0" : String(modelData))
-        opacity: occupied || focused ? 1 : 0.5
-        horizontalMargin: 6
-        verticalPadding: 6
-        fixedWidth: root.vertical ? root.barSize : Style.space(20)
-        fixedHeight: root.barSize
-        onPressed: function() { root.focusWorkspace(modelData) }
+        implicitWidth: btn.implicitWidth
+        implicitHeight: btn.implicitHeight
+
+        WidgetButton {
+          id: btn
+          anchors.fill: parent
+
+          bar: root.bar
+          text: modelData === 10 ? "0" : String(modelData)
+          opacity: cell.occupied || cell.focused ? 1 : 0.5
+          horizontalMargin: 6
+          verticalPadding: 6
+          fixedWidth: root.vertical ? root.barSize : Style.space(20)
+          fixedHeight: root.barSize
+          onPressed: function() { root.focusWorkspace(modelData) }
+        }
+
+        Rectangle {
+          visible: cell.focused
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.verticalCenter: parent.verticalCenter
+          anchors.verticalCenterOffset: Math.round(Style.font.body / 2) + Style.space(2)
+          width: Style.space(10)
+          height: Style.space(1)
+          radius: height / 2
+          color: Color.accent
+        }
       }
     }
   }

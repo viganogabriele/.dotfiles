@@ -10,10 +10,7 @@
           "id": "io.github.viganogabriele.fast-note-todo"
         },
         {
-          "id": "pick.screenshot"
-        },
-        {
-          "id": "omarchy.weather"
+          "id": "io.github.twiking.omasettings"
         },
         {
           "format": "dddd HH:mm",
@@ -23,6 +20,9 @@
         },
         {
           "id": "omarchy.system-update"
+        },
+        {
+          "id": "omarchy.weather"
         }
       ],
       "left": [
@@ -54,20 +54,6 @@
           "id": "jkoestinger.vpn"
         },
         {
-          "id": "io.github.viganogabriele.kdeconnect-iphone"
-        },
-        {
-          "id": "io.github.spencerbull.omapilot",
-          "builtinModel": "openai-codex::gpt-5.6-luna",
-          "dangerousAutoApprove": false,
-          "onboardingComplete": true,
-          "provider": "builtin",
-          "ttsModel": "kokoro-82m",
-          "ttsProvider": "kokoro",
-          "ttsVoice": "af_heart",
-          "voiceEnabled": true
-        },
-        {
           "id": "io.github.viganogabriele.unified-agent-watcher",
           "blinkOnBlocked": true,
           "groupingMode": "source",
@@ -79,17 +65,19 @@
       ],
       "right": [
         {
-          "id": "miseriae.gitarchy",
-          "lazyGitMode": "focus"
-        },
-        {
           "id": "omarchy.tray"
         },
         {
-          "id": "roymelgarv.omarchy-downloads"
+          "id": "dagyr.desktop-widgets"
         },
         {
-          "id": "agx.screen-time"
+          "id": "anishfn.widgets"
+        },
+        {
+          "id": "ch.wertstifter.tyme"
+        },
+        {
+          "id": "roymelgarv.omarchy-downloads"
         },
         {
           "id": "io.github.viganogabriele.agent-usage-plus",
@@ -161,6 +149,11 @@
               "enabled": false,
               "primary": false,
               "showInBar": false
+            },
+            "devin": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
             }
           },
           "barMode": "all",
@@ -173,7 +166,9 @@
           "testkey": null,
           "providerOrder": "[\"claude\",\"codex\"]",
           "colorfulUsageMeters": false,
-          "showAvailablePercentage": false
+          "showAvailablePercentage": false,
+          "syncMode": false,
+          "openInDetailedView": false
         },
         {
           "id": "omarchy.bluetooth"
