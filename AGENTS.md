@@ -102,6 +102,18 @@ Not everything worth reproducing on both machines is a dotfile:
   aren't packages and aren't in any pkglist — they won't show up as
   "orphans" in the pacman prune step even when stale. Handle them with
   `omarchy-webapp-remove` directly, not through this repo.
+- **Ruixen Shell** (the bar/shell replacing the stock Omarchy bar, providing
+  the `ruixen.bar`, `ruixen.workspaces`, `ruixen.tray`, etc. widgets
+  referenced in `omarchy-workspaces/.config/omarchy/shell.json`) is
+  installed from `~/dev/ruixen-shell` (clone of
+  `github.com/gitcoder89431/ruixen-shell`, run `./install.sh` from there) —
+  **not** via `omarchy plugin add`. Its plugin dirs under
+  `~/.config/omarchy/plugins/ruixen.*` are plain files, not individual git
+  repos, so `refresh_lists.sh`'s remote-URL check silently skips them: they
+  will **never** appear in `pkglist_omarchy_plugins.txt` and `install.sh`
+  will **not** reinstall Ruixen on a fresh machine. If `shell.json`
+  references `ruixen.*` widget ids, Ruixen must be installed manually first
+  (clone the repo, run its `install.sh`) before those widgets will resolve.
 
 ## Secrets discipline
 
