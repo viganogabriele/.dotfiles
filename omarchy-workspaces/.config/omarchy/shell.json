@@ -1,83 +1,57 @@
 {
   "bar": {
+    "id": "ruixen.bar",
+    "position": "top",
+    "transparent": true,
     "centerAnchor": "omarchy.clock",
     "layout": {
-      "center": [
-        {
-          "id": "omarchy.indicators"
-        },
-        {
-          "id": "io.github.viganogabriele.fast-note-todo"
-        },
-        {
-          "id": "io.github.twiking.omasettings"
-        },
-        {
-          "format": "dddd HH:mm",
-          "formatAlt": "d MMMM 'W'ww yyyy",
-          "id": "omarchy.clock",
-          "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "omarchy.system-update"
-        },
-        {
-          "id": "omarchy.weather"
-        }
-      ],
       "left": [
         {
-          "id": "omarchy.menu"
+          "id": "ruixen.workspaces"
         },
         {
-          "id": "gabriele.workspaces"
+          "id": "ruixen.pinnedapps"
         },
         {
-          "id": "quickshell.spotify"
+          "id": "ruixen.applauncher"
         },
         {
           "id": "aislandener.galaxy-buds"
         },
         {
-          "id": "omarchy.keyboard-layout"
-        },
-        {
-          "id": "omaplug"
-        },
-        {
-          "id": "io.github.ajanraj.disposable-email"
-        },
-        {
-          "id": "omarchy.tailscale"
+          "id": "crmne.hyprmoncfg"
         },
         {
           "id": "jkoestinger.vpn"
         },
         {
-          "id": "io.github.viganogabriele.unified-agent-watcher",
-          "blinkOnBlocked": true,
-          "groupingMode": "source",
-          "hideIdle": false,
-          "icon": "robot",
-          "notifications": false,
-          "refreshIntervalSec": 15
+          "id": "omarchy.tailscale"
+        },
+        {
+          "id": "io.github.ajanraj.disposable-email"
+        },
+        {
+          "id": "ruixen.stayawake"
+        }
+      ],
+      "center": [
+        {
+          "id": "ruixen.weather"
+        },
+        {
+          "id": "omarchy.clock",
+          "format": "HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "verticalFormat": "HH\n—\nmm"
         }
       ],
       "right": [
         {
-          "id": "omarchy.tray"
+          "id": "ruixen.tray",
+          "hidden": []
         },
         {
-          "id": "dagyr.desktop-widgets"
-        },
-        {
-          "id": "anishfn.widgets"
-        },
-        {
-          "id": "ch.wertstifter.tyme"
-        },
-        {
-          "id": "roymelgarv.omarchy-downloads"
+          "id": "ruixen.pluginpins"
         },
         {
           "id": "io.github.viganogabriele.agent-usage-plus",
@@ -163,7 +137,6 @@
           "barCycleSlots": 1,
           "barCycleIntervalSec": 3,
           "notificationsEnabled": true,
-          "testkey": null,
           "providerOrder": "[\"claude\",\"codex\"]",
           "colorfulUsageMeters": false,
           "showAvailablePercentage": false,
@@ -171,32 +144,21 @@
           "openInDetailedView": false
         },
         {
-          "id": "omarchy.bluetooth"
+          "id": "omarchy.system-update"
         },
         {
-          "id": "omarchy.network"
-        },
-        {
-          "id": "omarchy.audio"
-        },
-        {
-          "id": "crmne.hyprmoncfg"
-        },
-        {
-          "id": "omarchy.monitor"
+          "id": "ruixen.quickactions"
         },
         {
           "id": "omarchy.power",
           "showPercentage": true
         },
         {
-          "id": "hamsti.vitals",
-          "display": "CPU"
+          "id": "ruixen.settingsbutton"
         }
       ]
     },
-    "position": "top",
-    "transparent": true
+    "docked": false
   },
   "idle": {
     "lock": 300,
@@ -205,6 +167,21 @@
   "plugins": [
     {
       "id": "io.github.ok.omakoe"
+    },
+    {
+      "id": "ruixen.settings"
+    },
+    {
+      "id": "ruixen.media"
+    },
+    {
+      "id": "ruixen.wallpaper"
+    },
+    {
+      "id": "ruixen.notch"
+    },
+    {
+      "id": "ruixen.frame-widget"
     }
   ],
   "version": 1

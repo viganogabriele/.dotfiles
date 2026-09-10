@@ -106,3 +106,13 @@ hl.unbind("SUPER + ALT + H")
 o.bind("SUPER + ALT + H", "Continue OmaPilot chat in Herdr",
   "omarchy-shell -q io.github.spencerbull.omapilot continueInHerdr")
 -- END OmaPilot managed hotkeys
+
+-- BEGIN Ruixen Shell
+-- Ruixen non tocca le keybinding in fase di installazione, queste sono aggiunte a mano.
+o.bind("SUPER + R", "Ruixen Settings",
+  "omarchy-shell shell toggle ruixen.settings")
+o.bind("SUPER + SHIFT + R", "Ruixen Settings: Audio",
+  "omarchy-shell shell summon ruixen.settings '{\"section\":\"audio\"}'")
+o.bind("SUPER + N", "Ruixen notch dashboard",
+  "omarchy-shell ruixen.notch toggleDashboard")
+-- END Ruixen Shell

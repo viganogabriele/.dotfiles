@@ -33,5 +33,6 @@ pkief.material-icon-theme
 redhat.vscode-yaml
 ritwickdey.liveserver
 rodrigovallades.es7-react-js-snippets
+tahayvr.matteblack
 tomoki1207.pdf
 xabikos.javascriptsnippets
