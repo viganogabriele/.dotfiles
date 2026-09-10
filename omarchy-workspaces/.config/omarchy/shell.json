@@ -182,6 +182,9 @@
     },
     {
       "id": "ruixen.frame-widget"
+    },
+    {
+      "id": "ruixen.launcher"
     }
   ],
   "version": 1

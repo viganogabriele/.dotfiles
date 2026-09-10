@@ -27,6 +27,15 @@ NON_STOW_FOLDERS=("system")
 # contain their own relative symlinks (e.g. nvim's Omarchy theme hook) whose
 # target depth would break if stow collapsed the whole directory into one
 # symlink instead of mirroring it file-by-file.
+#
+# hypr/ can't go here even though it has the same class of problem (Ruixen
+# Shell's install.sh replaces the live ~/.config/hypr/looknfeel.lua with its
+# own managed symlink — with hypr folded, that mutation lands on the repo's
+# real file itself, corrupting the tracked copy): stow --no-folding refuses
+# to mirror hypr/.config/hypr/shaders/, whose files are themselves absolute
+# symlinks into /usr/share/aether/shaders. If this happens again, restore
+# looknfeel.lua from the stray looknfeel.lua.bak.<stamp> the installer
+# leaves behind (diff it against `git show HEAD:...` to confirm first).
 NO_FOLD_FOLDERS=("nvim")
 
 is_in() { local needle="$1"; shift; local x; for x in "$@"; do [[ "$x" == "$needle" ]] && return 0; done; return 1; }
