@@ -32,6 +32,9 @@
         },
         {
           "id": "ruixen.stayawake"
+        },
+        {
+          "id": "io.github.jeremylanger.omaspotify"
         }
       ],
       "center": [
@@ -52,6 +55,19 @@
         },
         {
           "id": "ruixen.pluginpins"
+        },
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "ruixen.quickactions"
+        },
+        {
+          "id": "omarchy.power",
+          "showPercentage": true
+        },
+        {
+          "id": "ruixen.settingsbutton"
         },
         {
           "id": "io.github.viganogabriele.agent-usage-plus",
@@ -83,6 +99,11 @@
               "barRole": "fixed",
               "enabled": false,
               "primary": false,
+              "showInBar": false
+            },
+            "devin": {
+              "barRole": "fixed",
+              "enabled": false,
               "showInBar": false
             },
             "fireworks": {
@@ -124,7 +145,7 @@
               "primary": false,
               "showInBar": false
             },
-            "devin": {
+            "agy": {
               "enabled": false,
               "showInBar": false,
               "barRole": "fixed"
@@ -144,21 +165,14 @@
           "openInDetailedView": false
         },
         {
-          "id": "omarchy.system-update"
+          "id": "omarchy.audio"
         },
         {
-          "id": "ruixen.quickactions"
-        },
-        {
-          "id": "omarchy.power",
-          "showPercentage": true
-        },
-        {
-          "id": "ruixen.settingsbutton"
+          "id": "omarchy.bluetooth"
         }
       ]
     },
-    "docked": false
+    "docked": true
   },
   "idle": {
     "lock": 300,
