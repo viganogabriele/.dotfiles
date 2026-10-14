@@ -129,6 +129,34 @@ ChatGPT-as-app, etc.) are just `.desktop` files, invisible to both the
 pacman prune step and the plugin list. Manage those directly with
 `omarchy-webapp-remove` / `omarchy-webapp-install`.
 
+### Ruixen Shell local fix
+
+The 2026-10-14 dock-background fix keeps the growing tray/widget background
+in the same window as the icons. It is saved as a minimal patch because
+Ruixen is installed separately from `~/dev/ruixen-shell`, not by Stow or
+`pkglist_omarchy_plugins.txt`.
+
+After pulling these dotfiles on the other machine, apply the fix:
+
+```bash
+git -C ~/dev/ruixen-shell apply --check ~/.dotfiles/personal/.local/share/dotfiles/ruixen/same-window-dock.patch
+git -C ~/dev/ruixen-shell apply ~/.dotfiles/personal/.local/share/dotfiles/ruixen/same-window-dock.patch
+(cd ~/dev/ruixen-shell && ./install.sh)
+cd ~/.dotfiles && stow hypr personal
+hyprctl reload && omarchy restart shell
+```
+
+If `apply --check` fails, use `git apply --reverse --check` with the same
+patch path to check whether the fix is already applied. Otherwise inspect
+the upstream change before applying it; do not force the patch or discard
+local edits. The patch was verified against Ruixen commit `f1c4a0a`.
+
+The shared Hyprland settings also open Settings through the current
+`ruixen.launcher` plugin and load `hypr.opacity` last, keeping opacity
+uniform when focus changes. Back up any real config files before resolving
+Stow conflicts; Ruixen's installer may have replaced previously stowed
+files.
+
 ## 🗑️ Removing obsolete packages
 
 When a machine has drifted (e.g. the desktop still had Omarchy 3 packages —

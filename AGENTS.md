@@ -115,6 +115,17 @@ Not everything worth reproducing on both machines is a dotfile:
   references `ruixen.*` widget ids, Ruixen must be installed manually first
   (clone the repo, run its `install.sh`) before those widgets will resolve.
 
+  The local dock-background fix (confirmed on 2026-10-14) is stored in
+  `personal/.local/share/dotfiles/ruixen/same-window-dock.patch`: it keeps
+  the background in BarPanel's widget window instead of FrameWindow's
+  stale Canvas. On the other machine, check/apply this patch to its Ruixen
+  checkout and run Ruixen's `install.sh` before re-applying the shared
+  Hyprland configs. See README's "Ruixen Shell local fix" section. Don't
+  reintroduce the failed geometry/repaint patches: switching the existing
+  renderer was the fix that actually worked. Ruixen installers may replace
+  `looknfeel.lua`; the shared `hypr.opacity` override loads afterwards to
+  keep focused and unfocused window opacity equal.
+
 ## Secrets discipline
 
 Never commit: API keys/tokens, `gh/hosts.yml`, SSH/GPG private keys,

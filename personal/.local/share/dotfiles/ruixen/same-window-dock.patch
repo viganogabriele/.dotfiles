@@ -1,0 +1,152 @@
+diff --git a/AGENTS.md b/AGENTS.md
+index 196a4f1..e506026 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -330,6 +330,14 @@ this before touching any of the three.
+   compiles and fires once; when something intermittently stops updating
+   live, verify the *specific* signal it's listening to is the one
+   that's actually still firing on every change, not just the first.
++- **Keep the active dock background in the widget content window.**
++  The frame-owned Canvas failed repeatedly in a real session: widget
++  extents grew while the background retained its old paint. Qt tests of
++  the isolated Canvas passed, so changing geometry formulas did not fix
++  the integration. `frameOwnsDockChrome` is now false: the existing
++  BarPanel rectangles and shoulder shapes follow the same live geometry
++  and window as the widgets. The FrameWindow dock must remain disabled
++  in this mode to avoid painting a second, stale dock underneath it.
+ - **Two separate surface-identity systems, deliberately not unified**
+   (issue #78 raised this as an open "Option A vs. Option B" question;
+   resolved as Option A — kept independent). `frameColorMode`/
+diff --git a/bars/v2/ruixen.bar/Bar.qml b/bars/v2/ruixen.bar/Bar.qml
+index 3f54de0..688d713 100644
+--- a/bars/v2/ruixen.bar/Bar.qml
++++ b/bars/v2/ruixen.bar/Bar.qml
+@@ -107,7 +107,9 @@ Item {
+   // screen first so the frame can consume it without guessing pill widths.
+   property var dockChromeMetricsByScreen: ({})
+   property int dockChromeMetricsSerial: 0
+-  readonly property bool frameOwnsDockChrome: true
++  // Keep dock backgrounds in the content window: the frame-owned Canvas
++  // can retain old geometry while asynchronous tray/widgets grow.
++  readonly property bool frameOwnsDockChrome: false
+   readonly property bool integratedTopDockSurface: docked && position === "top"
+
+   function surfaceLuminance(c) {
+diff --git a/bars/v2/ruixen.bar/FrameWindow.qml b/bars/v2/ruixen.bar/FrameWindow.qml
+index c3a4ed3..9b033e8 100644
+--- a/bars/v2/ruixen.bar/FrameWindow.qml
++++ b/bars/v2/ruixen.bar/FrameWindow.qml
+@@ -308,7 +308,7 @@ PanelWindow {
+   // layer-surface coordinate space.
+   Item {
+     id: dockChrome
+-    visible: frameWindow.barRoot.docked && frameWindow.barRoot.position === "top" && frameWindow.dockChromeMetrics.screenWidth > 0
++    visible: frameWindow.barRoot.docked && frameWindow.barRoot.position === "top" && frameWindow.dockChromeMetrics.screenWidth > 0 && frameWindow.barRoot.frameOwnsDockChrome
+     x: frameWindow.barRoot.frameInset - frameWindow.barRoot.seamOverlap
+     y: frameWindow.barRoot.frameInset
+     width: frameWindow.dockChromeMetrics.screenWidth + frameWindow.barRoot.seamOverlap * 2
+diff --git a/tests/chrome-surface-refactor.sh b/tests/chrome-surface-refactor.sh
+index 5277865..17eeaae 100755
+--- a/tests/chrome-surface-refactor.sh
++++ b/tests/chrome-surface-refactor.sh
+@@ -30,8 +30,8 @@ check "root stores dock chrome metrics per screen, not as one global scalar" \
+ check "root exposes a serial so var-map metric updates notify frame bindings" \
+   "$(grep -c 'property int dockChromeMetricsSerial: 0' "$bar_qml")" "1"
+
+-check "frame is the single active owner for dock chrome visuals" \
+-  "$(grep -c 'readonly property bool frameOwnsDockChrome: true' "$bar_qml")" "1"
++check "bar content window owns the active dock chrome visuals" \
++  "$(grep -c 'readonly property bool frameOwnsDockChrome: false' "$bar_qml")" "1"
+
+ check "dock chrome metrics are keyed by the real layer-window screen name" \
+   "$(grep -c 'function screenNameForWindow(window)' "$bar_qml")" "1"
+@@ -91,5 +91,8 @@ check "tests/run-all.sh runs this suite" \
+   "$(grep -m1 'chrome-surface-refactor.sh' "$run_all")" \
+   '  "$script_dir/chrome-surface-refactor.sh"'
+
++check "frame dock chrome is disabled when the content window owns it" \
++  "$(grep -c 'visible:.*frameWindow.barRoot.frameOwnsDockChrome' "$frame_qml")" "1"
++
+ printf '\n%d passed, %d failed\n' "$pass" "$fail_count"
+ [[ "$fail_count" -eq 0 ]]
+diff --git a/tests/dock-background-live.py b/tests/dock-background-live.py
+new file mode 100644
+index 0000000..980ee86
+--- /dev/null
++++ b/tests/dock-background-live.py
+@@ -0,0 +1,75 @@
++#!/usr/bin/env python3
++"""Render the installed dock rectangle with a growing tray using real Qt Quick."""
++from pathlib import Path
++import os
++import re
++import subprocess
++import tempfile
++
++repo = Path(__file__).resolve().parent.parent
++source = (repo / "bars/v2/ruixen.bar/BarPanel.qml").read_text()
++identifier = source.index("        id: rightDockedBg")
++start = source.rfind("      Rectangle {", 0, identifier)
++end = source.index("\n      }", identifier) + 8
++rectangle = source[start:end]
++bar = (repo / "bars/v2/ruixen.bar/Bar.qml").read_text()
++owner = re.search(r"readonly property bool frameOwnsDockChrome: (true|false)", bar).group(1)
++qml = '''import QtQuick
++import QtTest
++Item {
++ id: barWindow
++ width: 1024; height: 80
++ property var barRoot: QtObject {
++  property bool docked: true
++  property bool frameOwnsDockChrome: OWNER
++  property int barSize: 34
++  property color dockedBarColor: "black"
++  property var dockedSkin: QtObject { property bool dockSpansFullWidth: false }
++ }
++ Item {
++  id: horizontalBarRoot
++  width: 1024; height: 58
++  property int trayCount: 2
++  function publishDockChromeMetrics() {}
++  RECTANGLE
++  Item {
++   id: trayPill
++   x: horizontalBarRoot.width - width - 220
++   width: icons.implicitWidth + 40; height: 34
++   Row {
++    id: icons
++    x: 20; y: 11
++    Repeater {
++     model: horizontalBarRoot.trayCount
++     Rectangle { width: 20; height: 12; color: "white" }
++    }
++   }
++  }
++ }
++ TestCase {
++  name: "DockBackground"
++  when: windowShown
++  function test_backgroundGrowsWithNewTrayIcons() {
++   compare(rightDockedBg.visible, true)
++   tryCompare(trayPill, "width", 80)
++   compare(rightDockedBg.x, 724)
++   compare(grabImage(horizontalBarRoot).red(578,17), 255)
++   horizontalBarRoot.trayCount = 10
++   tryCompare(trayPill, "width", 240)
++   tryCompare(rightDockedBg, "x", 564)
++   compare(rightDockedBg.width, 460)
++   tryVerify(function() { return grabImage(horizontalBarRoot).red(578,17) === 0 })
++   // The leading icon keeps the same padding as the group expands.
++   compare(icons.mapToItem(horizontalBarRoot,0,0).x - rightDockedBg.x, 20)
++  }
++ }
++}
++'''.replace("OWNER", owner).replace("RECTANGLE", rectangle)
++env = dict(os.environ, QT_QPA_PLATFORM="offscreen",
++           QT_QPA_PLATFORMTHEME="generic", QT_STYLE_OVERRIDE="Fusion")
++runner = "/usr/lib/qt6/bin/qmltestrunner"
++if not Path(runner).is_file():
++    raise SystemExit("Qt 6 qmltestrunner is required for this focused runtime check")
++with tempfile.TemporaryDirectory(prefix="ruixen-dock-background-") as directory:
++    (Path(directory) / "tst_background.qml").write_text(qml)
++    raise SystemExit(subprocess.run([runner, "-input", directory], env=env).returncode)
