@@ -47,3 +47,6 @@ do local path = os.getenv("HOME") .. "/.config/hypr/hyprmoncfg-monitors.lua"; lo
 
 -- Personal opacity preference loads after desktop profiles and app rules.
 require("hypr.opacity")
+
+-- Preserve personal mouse resizing, spacing and corners after desktop profiles.
+require("hypr.window-layout")

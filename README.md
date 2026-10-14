@@ -153,7 +153,10 @@ local edits. The patch was verified against Ruixen commit `f1c4a0a`.
 
 The shared Hyprland settings also open Settings through the current
 `ruixen.launcher` plugin and load `hypr.opacity` last, keeping opacity
-uniform when focus changes. Back up any real config files before resolving
+uniform when focus changes. The subsequent `hypr.window-layout` override
+preserves the original mouse-border resizing, 2px inner gaps, 4px outer gaps,
+and 10px window corners across desktop-profile updates. Back up any real
+config files before resolving
 Stow conflicts; Ruixen's installer may have replaced previously stowed
 files.
 
