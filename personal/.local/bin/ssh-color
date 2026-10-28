@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+"""ssh wrapper: colora in rosso grassetto il nome `root` nei prompt (root@host)."""
+import os, pty, re, select, signal, struct, sys, termios, fcntl, tty
+
+PAT = re.compile(rb'(\x1b\[[0-9;?]*[A-Za-z]|(?<![\w/.-]))root(?=@)')
+REPL = lambda m: m.group(1) + b'\x1b[1;31mroot\x1b[0m'
+
+
+def copy_winsize(src, dst):
+    fcntl.ioctl(dst, termios.TIOCSWINSZ, fcntl.ioctl(src, termios.TIOCGWINSZ, b'\0' * 8))
+
+
+REAL_SSH = '/usr/bin/ssh'
+
+
+def main():
+    if not (sys.stdin.isatty() and sys.stdout.isatty()):
+        os.execv(REAL_SSH, ['ssh'] + sys.argv[1:])  # scp, git, script: nessun filtro
+    pid, master = pty.fork()
+    if pid == 0:
+        os.execv(REAL_SSH, ['ssh'] + sys.argv[1:])
+
+    stdin, stdout = sys.stdin.fileno(), sys.stdout.fileno()
+    old = termios.tcgetattr(stdin)
+
+    def winch(*_):
+        copy_winsize(stdin, master)
+        os.kill(pid, signal.SIGWINCH)
+
+    signal.signal(signal.SIGWINCH, winch)
+    winch()
+    tty.setraw(stdin)
+    held = b''
+    try:
+        while True:
+            r, _, _ = select.select([stdin, master], [], [], 0.05 if held else None)
+            if not r:
+                os.write(stdout, held)
+                held = b''
+                continue
+            if stdin in r:
+                data = os.read(stdin, 4096)
+                if not data:
+                    break
+                os.write(master, data)
+            if master in r:
+                try:
+                    data = os.read(master, 4096)
+                except OSError:
+                    break
+                if not data:
+                    break
+                data = held + data
+                held = b''
+                if data.endswith(b'root'):  # aspetta di vedere la '@'
+                    held, data = b'root', data[:-4]
+                os.write(stdout, PAT.sub(REPL, data))
+    finally:
+        termios.tcsetattr(stdin, termios.TCSADRAIN, old)
+    if held:
+        os.write(stdout, held)
+    _, status = os.waitpid(pid, 0)
+    sys.exit(os.waitstatus_to_exitcode(status))
+
+
+main()
