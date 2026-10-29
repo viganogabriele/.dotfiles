@@ -4,6 +4,8 @@ codex = "latest"
 copilot = "latest"
 gh = "latest"
 "npm:playwright" = "latest"
+opencode = "latest"
+pi = "latest"
 python = "3.14"
 
 [settings.upgrade]
