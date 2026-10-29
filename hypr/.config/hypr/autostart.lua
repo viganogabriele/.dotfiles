@@ -3,3 +3,4 @@
 
 o.launch_on_start("solaar -w hide")
 o.launch_on_start("hyprsunset")
+o.launch_on_start("hypridle")

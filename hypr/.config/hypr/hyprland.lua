@@ -49,5 +49,7 @@ require("hypr.opacity")
 -- Preserve personal mouse resizing, spacing and corners after desktop profiles.
 require("hypr.window-layout")
 
+pcall(require, "/home/gabriele/.config/hypr/openwhispr-binds.lua")
+
 -- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
 do local path = os.getenv("HOME") .. "/.config/hypr/hyprmoncfg-monitors.lua"; local file = io.open(path, "r"); if file then file:close(); dofile(path) end end

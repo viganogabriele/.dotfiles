@@ -91,28 +91,18 @@ for i = 0, 9 do
   end)
 end
 
--- BEGIN OmaPilot managed hotkeys
--- Added at the user request from OmaPilot settings. Edit these bindings freely.
-hl.unbind("SUPER + A")
-o.bind("SUPER + A", "Talk to OmaPilot",
-  "omarchy-shell -q io.github.spencerbull.omapilot voiceToggle")
-hl.unbind("SUPER + ALT + X")
-o.bind("SUPER + ALT + X", "Cancel OmaPilot voice mode",
-  "omarchy-shell -q io.github.spencerbull.omapilot voiceCancel")
-hl.unbind("SUPER + ALT + N")
-o.bind("SUPER + ALT + N", "New OmaPilot chat",
-  "omarchy-shell -q io.github.spencerbull.omapilot newChat")
-hl.unbind("SUPER + ALT + H")
-o.bind("SUPER + ALT + H", "Continue OmaPilot chat in Herdr",
-  "omarchy-shell -q io.github.spencerbull.omapilot continueInHerdr")
--- END OmaPilot managed hotkeys
+
+-- BEGIN Voxtype push-to-talk
+o.bind("F9", "Voxtype start recording", "voxtype record start")
+o.bind("F9", "Voxtype stop recording", "voxtype record stop", { release = true })
+-- END Voxtype push-to-talk
 
 -- BEGIN Ruixen Shell
 -- Ruixen non tocca le keybinding in fase di installazione, queste sono aggiunte a mano.
 o.bind("SUPER + R", "Ruixen Settings",
-  "omarchy-shell shell toggle ruixen.launcher '{\"extension\":\"settings\"}'")
+  "omarchy-shell shell toggle ruixen.settings")
 o.bind("SUPER + SHIFT + R", "Ruixen Settings: Audio",
-  "omarchy-shell shell summon ruixen.launcher '{\"extension\":\"settings\",\"section\":\"audio\"}'")
+  "omarchy-shell shell summon ruixen.settings '{\"section\":\"audio\"}'")
 o.bind("SUPER + N", "Ruixen notch dashboard",
   "omarchy-shell ruixen.notch toggleDashboard")
 -- END Ruixen Shell
