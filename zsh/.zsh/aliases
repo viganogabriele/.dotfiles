@@ -50,6 +50,7 @@ alias gpl='git pull --rebase' # Pull latest changes and rebase local commits
 alias gp='git push' # Push current branch to remote
 alias gpf='git push --force-with-lease' # Safe force push protecting remote updates
 alias gco='git checkout' # Switch branches or restore working tree files
+alias gsw='git switch' # Switch branches
 alias gcb='git checkout -b' # Create a new branch and switch to it
 alias gb='git branch' # List and manage local branches
 alias gl='git log --oneline --graph --decorate --all' # Compact commit graph for all branches

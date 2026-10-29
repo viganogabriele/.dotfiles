@@ -5,3 +5,5 @@
 - [Don't wrap Skill calls in a fork](feedback_no_fork_wrapping_skill.md) — call Skill (e.g. code-review) directly; a fork wrapper can drift into unsupervised action
 - [Homelab state & plan](project_homelab.md) — TrueNAS/Proxmox migration off old Win10 server, printer/CUPS reverse-engineering, WireGuard-via-bot setup
 - [No Claude as GitHub contributor](feedback_no_claude_contributor.md) — never Co-Authored-By/Claude author in commits, PRs, issues; repeat in agent briefs
+- [Preferenze energia laptop](user_laptop_power_prefs.md) — LG Gram: carica al 100%, wifi powersave off, niente TLP (solo PPD)
+- [No Claude attribution in git](feedback_no_git_attribution.md) — never add Co-Authored-By/Generated-with lines to commits or PRs
