@@ -7,3 +7,4 @@
 - [No Claude as GitHub contributor](feedback_no_claude_contributor.md) — never Co-Authored-By/Claude author in commits, PRs, issues; repeat in agent briefs
 - [Preferenze energia laptop](user_laptop_power_prefs.md) — LG Gram: carica al 100%, wifi powersave off, niente TLP (solo PPD)
 - [No Claude attribution in git](feedback_no_git_attribution.md) — never add Co-Authored-By/Generated-with lines to commits or PRs
+- [Cloudflare DDNS + OpenCloud cutover](project_cloudflare_ddns_cutover.md) — stato 2026-10-30: DDNS/Traefik/Pocket ID fatti, manca apertura 80/443 e DNS cloud/auth
