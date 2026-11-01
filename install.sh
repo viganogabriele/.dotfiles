@@ -230,6 +230,13 @@ if is_in "nightlight" "${STOW_FOLDERS[@]}"; then
     systemctl --user enable --now omarchy-nightlight-on.timer omarchy-nightlight-off.timer 2>&1 || warn "Could not enable nightlight timers."
 fi
 
+# gvfsd-fuse bridge: makes gio-mounted SMB/NFS shares reachable by non-GIO apps.
+if is_in "gvfs-fuse" "${STOW_FOLDERS[@]}"; then
+    systemctl --user daemon-reload 2>/dev/null || true
+    log "Enabling gvfsd-fuse bridge."
+    systemctl --user enable --now gvfsd-fuse.service 2>&1 || warn "Could not enable gvfsd-fuse service."
+fi
+
 systemctl --user daemon-reload 2>/dev/null || true
 
 # --- 9. VS Code Extensions ---

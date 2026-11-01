@@ -1,0 +1,19 @@
+[Unit]
+Description=GVfs FUSE bridge (exposes gio mounts at $XDG_RUNTIME_DIR/gvfs)
+Documentation=man:gvfsd-fuse(1)
+After=gvfs-daemon.service
+Wants=gvfs-daemon.service
+
+[Service]
+# gvfsd-fuse is normally spawned by gvfs-daemon, but it does not always start,
+# leaving /run/user/<uid>/gvfs empty: Nautilus (GIO) still sees SMB/NFS shares
+# while non-GIO apps (Chromium, editors) get ERR_FILE_NOT_FOUND on those paths.
+ExecStartPre=/usr/bin/mkdir -p %t/gvfs
+ExecStart=/usr/lib/gvfsd-fuse %t/gvfs -f
+# Clear a stale "Transport endpoint is not connected" mount after a crash.
+ExecStopPost=-/usr/bin/fusermount3 -u -z %t/gvfs
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
