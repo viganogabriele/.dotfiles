@@ -255,7 +255,7 @@
           "id": "ruixen.quickactions"
         },
         {
-          "id": "ruixen.power",
+          "id": "omarchy.power",
           "showPercentage": true
         },
         {
@@ -277,6 +277,9 @@
   },
   "plugins": [
     {
+      "id": "ruixen.settings"
+    },
+    {
       "id": "ruixen.media"
     },
     {
@@ -286,16 +289,10 @@
       "id": "ruixen.notch"
     },
     {
+      "id": "ruixen.frame-widget"
+    },
+    {
       "id": "io.voxtype.settings"
-    },
-    {
-      "id": "ruixen.launcher"
-    },
-    {
-      "id": "ruixen.cava"
-    },
-    {
-      "id": "ruixen.shelf"
     }
   ],
   "version": 1
