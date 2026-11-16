@@ -264,27 +264,6 @@ if [[ -f /etc/updatedb.conf ]] && ! grep -q 'fuse\.rclone' /etc/updatedb.conf; t
     sudo sed -i 's|^PRUNEFS = "|PRUNEFS = "fuse.rclone fuse.gvfsd-fuse fuse.portal |' /etc/updatedb.conf
 fi
 
-# --- 9b2. Keyboard layouts: IT + US-intl in the fcitx5 group ---
-# Since Omarchy 4.5 keys go through fcitx5, so layouts are switched by cycling
-# its input group (SUPER+ALT+I in bindings.lua), not by xkb grp: options.
-# Not stowed: fcitx5 rewrites its profile atomically, which would replace a
-# symlink with a real file.
-FCITX_PROFILE="$HOME/.config/fcitx5/profile"
-if command -v fcitx5 &>/dev/null && ! grep -q 'keyboard-us-intl' "$FCITX_PROFILE" 2>/dev/null; then
-    log "Adding US-intl layout to the fcitx5 input group..."
-    if pgrep -x fcitx5 &>/dev/null; then
-        fcitx_ctl=(busctl --user call org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1)
-        "${fcitx_ctl[@]}" SetInputMethodGroupInfo "ssa(ss)" Default it 2 keyboard-it "" keyboard-us-intl "" &&
-            "${fcitx_ctl[@]}" Save
-    else
-        mkdir -p "$(dirname "$FCITX_PROFILE")"
-        printf '%s\n' '[Groups/0]' 'Name=Default' 'Default Layout=it' 'DefaultIM=keyboard-it' '' \
-            '[Groups/0/Items/0]' 'Name=keyboard-it' 'Layout=' '' \
-            '[Groups/0/Items/1]' 'Name=keyboard-us-intl' 'Layout=' '' \
-            '[GroupOrder]' '0=Default' > "$FCITX_PROFILE"
-    fi
-fi
-
 # --- 9c. mise-managed Python: ensure setuptools (distutils shim) ---
 # mise's python builds ship with pip only, no setuptools. `g-ir-scanner`
 # (used by AUR builds like cogl/clutter) does `import distutils`, which
