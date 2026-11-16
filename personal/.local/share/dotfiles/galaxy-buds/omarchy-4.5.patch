@@ -1,0 +1,65 @@
+diff --git a/BudsBridge.qml b/BudsBridge.qml
+new file mode 100644
+index 0000000..378b55a
+--- /dev/null
++++ b/BudsBridge.qml
+@@ -0,0 +1,9 @@
++pragma Singleton
++import QtQuick
++
++// Omarchy 4.5 gives widgets hosted by a replacement bar (e.g. Ruixen) a
++// service-less shell facade, so bar.shell.serviceFor() returns null there.
++// The service registers itself here and the panel falls back to it.
++QtObject {
++  property var service: null
++}
+diff --git a/Panel.qml b/Panel.qml
+index 5810d1d..b33264b 100644
+--- a/Panel.qml
++++ b/Panel.qml
+@@ -14,7 +14,7 @@ Panel {
+ 
+   // The helper lives in the plugin's service, mounted once per session; this
+   // widget is mounted once per monitor and only renders what the service holds.
+-  readonly property var service: bar && bar.shell ? bar.shell.serviceFor(moduleName) : null
++  readonly property var service: (bar && bar.shell ? bar.shell.serviceFor(moduleName) : null) || BudsBridge.service
+   readonly property var buds: service ? service.state : ({})
+ 
+   readonly property bool connected: buds.connected === true
+@@ -201,8 +201,13 @@ Panel {
+   }
+   readonly property int cursorCount: focusableRows.length
+ 
+-  onOpenedChanged: {
+-    if (opened) selectCursor(0)
++  // Omarchy 4.5's base Panel already defines onOpenedChanged; a second
++  // handler on the same object fails with "Property value set multiple times".
++  Connections {
++    target: root
++    function onOpenedChanged() {
++      if (root.opened) root.selectCursor(0)
++    }
+   }
+ 
+   readonly property var modeOptions: {
+diff --git a/Service.qml b/Service.qml
+index ca44225..873e488 100644
+--- a/Service.qml
++++ b/Service.qml
+@@ -15,6 +15,9 @@ QtObject {
+   property var state: ({})
+ 
+   readonly property string pluginId: "aislandener.galaxy-buds"
++
++  Component.onCompleted: BudsBridge.service = root
++  Component.onDestruction: if (BudsBridge.service === root) BudsBridge.service = null
+   readonly property string helperPath: Qt.resolvedUrl("bin/galaxy-buds").toString().replace(/^file:\/\//, "")
+ 
+   function send(request) {
+diff --git a/qmldir b/qmldir
+new file mode 100644
+index 0000000..861c13a
+--- /dev/null
++++ b/qmldir
+@@ -0,0 +1 @@
++singleton BudsBridge 1.0 BudsBridge.qml

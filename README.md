@@ -162,17 +162,25 @@ files.
 
 ### Galaxy Buds plugin on Omarchy 4.5
 
-Omarchy 4.5's base `Panel` already defines `onOpenedChanged`, so the
-marketplace `aislandener.galaxy-buds` plugin fails to load ("Property value set
-multiple times"). Until upstream fixes it, apply the local patch:
+The marketplace `aislandener.galaxy-buds` plugin needs two local fixes on
+Omarchy 4.5, both in one patch until upstream catches up:
+
+- 4.5's base `Panel` already defines `onOpenedChanged`, so the plugin's own
+  handler failed to load ("Property value set multiple times"); it now uses a
+  `Connections` block.
+- 4.5 gives widgets hosted by a replacement bar (Ruixen) a service-less shell
+  facade, so the panel showed "The plugin service is not running" while the
+  service was fine. A `BudsBridge` singleton (plus `qmldir`) lets the service
+  hand itself to the panel.
 
 ```bash
-git -C ~/.config/omarchy/plugins/aislandener.galaxy-buds apply ~/.dotfiles/personal/.local/share/dotfiles/galaxy-buds/omarchy-4.5-opened-handler.patch
+git -C ~/.config/omarchy/plugins/aislandener.galaxy-buds apply ~/.dotfiles/personal/.local/share/dotfiles/galaxy-buds/omarchy-4.5.patch
 omarchy-restart-shell
 ```
 
 `omarchy plugin update` refuses to fast-forward while the patch is applied;
-revert it with `git checkout Panel.qml` in the plugin dir first.
+revert it first with `git checkout Panel.qml Service.qml && rm BudsBridge.qml qmldir`
+in the plugin dir.
 
 ### Omarchy 4.5 keybinding conflicts
 
