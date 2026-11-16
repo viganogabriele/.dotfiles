@@ -1,12 +1,6 @@
 [tools]
-claude = "latest"
-codex = "latest"
-copilot = "latest"
-gh = "latest"
+gh = { version = "latest", minimum_release_age = "0s", lazy = true }
 "npm:playwright" = "latest"
-opencode = "latest"
-pi = "latest"
 python = "3.14"
 
 [settings.upgrade]
-auto_prune = false
