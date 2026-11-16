@@ -6,9 +6,9 @@
 hl.config({
   input = {
     -- IT (default on boot) + US (international, for accented letters via
-    -- ' and ` dead keys). Switch with SUPER+ALT+I (bindings.lua). Caps Lock is
-    -- a plain Caps Lock: grp:caps_toggle was dropped, and the empty kb_options
-    -- also replaces Omarchy's omarchy:shift_caps_compose default.
+    -- ' and ` dead keys). Switch with Shift+Caps Lock (grp:shift_caps_toggle)
+    -- or SUPER+ALT+I (bindings.lua); Caps Lock alone is a plain Caps Lock.
+    -- Setting kb_options also replaces Omarchy's omarchy:shift_caps_compose.
     -- Keep fcitx5's group to the single keyboard-it: an extra keyboard-*
     -- entry there gets switched together with these layouts.
     -- NOTE: previously "grp:alts_toggle" (Left Alt + Right Alt), but that
@@ -19,7 +19,7 @@ hl.config({
     -- the layout to switch on its own.
     kb_layout = "it,us",
     kb_variant = ",intl",
-    kb_options = "",
+    kb_options = "grp:shift_caps_toggle",
 
     -- Change speed of keyboard repeat.
     repeat_rate = 40,

@@ -64,7 +64,7 @@ o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus 'org[.]telegram
 hl.unbind("SUPER + I") -- was: Switch input language
 hl.unbind("SUPER + SHIFT + I") -- was: Switch input language back
 -- IT <-> US-intl switch lives here instead: cycles the kb_layout list from
--- input.lua (Caps Lock stays a plain Caps Lock).
+-- input.lua (same as Shift+Caps Lock; Caps Lock alone stays Caps Lock).
 o.bind("SUPER + ALT + I", "Switch keyboard layout (IT/US)", "omarchy-input-method cycle")
 o.bind("SUPER + U", "Claude", 'omarchy-launch-webapp "https://claude.ai/new"')
 o.bind("SUPER + I", "ChatGPT", 'omarchy-launch-webapp "https://chatgpt.com/"')

@@ -182,7 +182,8 @@ SUPER+SHIFT+T is Telegram only (Activity/btop moved to SUPER+SHIFT+K), and
 SUPER+I / SUPER+SHIFT+I stay ChatGPT / Codex. IT <-> US-intl moved to
 SUPER+ALT+I (`omarchy-input-method cycle`, which switches the `it,us` layouts
 from `input.lua`; keep fcitx5's group to the single `keyboard-it`, or the two
-switch at once). Caps Lock is a plain Caps Lock (`kb_options = ""`).
+switch at once). Shift+Caps Lock switches too (`grp:shift_caps_toggle`);
+Caps Lock alone is a plain Caps Lock.
 
 ## 🗑️ Removing obsolete packages
 
