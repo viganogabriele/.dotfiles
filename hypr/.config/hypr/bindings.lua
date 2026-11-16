@@ -63,6 +63,10 @@ o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus 'org[.]telegram
 -- Always opens a new browser window (not focus-if-open).
 hl.unbind("SUPER + I") -- was: Switch input language
 hl.unbind("SUPER + SHIFT + I") -- was: Switch input language back
+-- IT <-> US-intl switch lives here instead. Since Omarchy 4.5 keys go through
+-- fcitx5, which forces its own group, so xkb's grp:caps_toggle no longer
+-- switches layouts; the fcitx5 group (it, us-intl) is cycled instead.
+o.bind("SUPER + ALT + I", "Switch keyboard layout (IT/US)", "omarchy-input-method cycle")
 o.bind("SUPER + U", "Claude", 'omarchy-launch-webapp "https://claude.ai/new"')
 o.bind("SUPER + I", "ChatGPT", 'omarchy-launch-webapp "https://chatgpt.com/"')
 
