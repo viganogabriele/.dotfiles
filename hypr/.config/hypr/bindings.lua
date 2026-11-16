@@ -107,9 +107,9 @@ o.bind("F9", "Voxtype stop recording", "voxtype record stop", { release = true }
 -- BEGIN Ruixen Shell
 -- Ruixen non tocca le keybinding in fase di installazione, queste sono aggiunte a mano.
 o.bind("SUPER + R", "Ruixen Settings",
-  "omarchy-shell shell toggle ruixen.settings")
+  "omarchy-shell shell toggle ruixen.launcher '{\"extension\":\"settings\"}'")
 o.bind("SUPER + SHIFT + R", "Ruixen Settings: Audio",
-  "omarchy-shell shell summon ruixen.settings '{\"section\":\"audio\"}'")
+  "omarchy-shell shell summon ruixen.launcher '{\"extension\":\"settings\",\"section\":\"audio\"}'")
 o.bind("SUPER + N", "Ruixen notch dashboard",
   "omarchy-shell ruixen.notch toggleDashboard")
 -- END Ruixen Shell

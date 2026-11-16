@@ -149,7 +149,7 @@ hyprctl reload && omarchy restart shell
 If `apply --check` fails, use `git apply --reverse --check` with the same
 patch path to check whether the fix is already applied. Otherwise inspect
 the upstream change before applying it; do not force the patch or discard
-local edits. The patch was verified against Ruixen commit `f1c4a0a`.
+local edits. The patch was verified against Ruixen commits `f1c4a0a` and `f776784` (2026-11-16, still needed: upstream has not fixed the dock background).
 
 The shared Hyprland settings also open Settings through the current
 `ruixen.launcher` plugin and load `hypr.opacity` last, keeping opacity
