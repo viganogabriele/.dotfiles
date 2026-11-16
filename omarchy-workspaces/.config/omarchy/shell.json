@@ -22,10 +22,8 @@
           "id": "crmne.hyprmoncfg"
         },
         {
-          "id": "jkoestinger.vpn"
-        },
-        {
-          "id": "omarchy.tailscale"
+          "id": "jkoestinger.vpn",
+          "hiddenBackends": ""
         },
         {
           "id": "io.github.ajanraj.disposable-email"
@@ -34,7 +32,13 @@
           "id": "ruixen.stayawake"
         },
         {
-          "id": "io.github.jeremylanger.omaspotify"
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.tailscale"
         }
       ],
       "center": [
@@ -46,6 +50,31 @@
           "format": "HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "verticalFormat": "HH\n—\nmm"
+        },
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Rome",
+              "zone": "Europe/Rome"
+            },
+            {
+              "name": "Dubai",
+              "zone": "Asia/Dubai"
+            },
+            {
+              "name": "Tokyo",
+              "zone": "Asia/Tokyo"
+            },
+            {
+              "name": "Los Angeles",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "name": "New York",
+              "zone": "America/New_York"
+            }
+          ]
         }
       ],
       "right": [
@@ -57,17 +86,7 @@
           "id": "ruixen.pluginpins"
         },
         {
-          "id": "omarchy.system-update"
-        },
-        {
-          "id": "ruixen.quickactions"
-        },
-        {
-          "id": "omarchy.power",
-          "showPercentage": true
-        },
-        {
-          "id": "ruixen.settingsbutton"
+          "id": "omarchy.network"
         },
         {
           "id": "io.github.viganogabriele.agent-usage-plus",
@@ -149,6 +168,71 @@
               "enabled": false,
               "showInBar": false,
               "barRole": "fixed"
+            },
+            "copilot": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "grok": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "grokbot": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "hermes": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "kimchi": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "local": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "minimax": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "muse": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "ollama": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "opencode": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "synthetic": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "vibe": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
+            },
+            "qwen": {
+              "enabled": false,
+              "showInBar": false,
+              "barRole": "fixed"
             }
           },
           "barMode": "all",
@@ -165,26 +249,33 @@
           "openInDetailedView": false
         },
         {
-          "id": "omarchy.audio"
+          "id": "omarchy.system-update"
         },
         {
-          "id": "omarchy.bluetooth"
+          "id": "ruixen.quickactions"
+        },
+        {
+          "id": "ruixen.power",
+          "showPercentage": true
+        },
+        {
+          "id": "ruixen.settingsbutton"
+        },
+        {
+          "id": "omarchy.monitor"
         }
-      ]
+      ],
+      "centerBegin": [],
+      "centerEnd": [],
+      "tray": []
     },
-    "docked": true
+    "docked": false
   },
   "idle": {
     "lock": 300,
     "screensaver": 150
   },
   "plugins": [
-    {
-      "id": "io.github.ok.omakoe"
-    },
-    {
-      "id": "ruixen.settings"
-    },
     {
       "id": "ruixen.media"
     },
@@ -195,10 +286,16 @@
       "id": "ruixen.notch"
     },
     {
-      "id": "ruixen.frame-widget"
+      "id": "io.voxtype.settings"
     },
     {
       "id": "ruixen.launcher"
+    },
+    {
+      "id": "ruixen.cava"
+    },
+    {
+      "id": "ruixen.shelf"
     }
   ],
   "version": 1
