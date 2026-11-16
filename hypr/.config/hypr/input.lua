@@ -6,8 +6,8 @@
 hl.config({
   input = {
     -- IT (default on boot) + US (international, for accented letters via
-    -- ' and ` dead keys). Switch with Shift+Caps Lock (grp:shift_caps_toggle)
-    -- or SUPER+ALT+I (bindings.lua); Caps Lock alone is a plain Caps Lock.
+    -- ' and ` dead keys). Switch with Shift+Caps Lock (grp:shift_caps_toggle);
+    -- Caps Lock alone is a plain Caps Lock.
     -- Setting kb_options also replaces Omarchy's omarchy:shift_caps_compose.
     -- Keep fcitx5's group to the single keyboard-it: an extra keyboard-*
     -- entry there gets switched together with these layouts.

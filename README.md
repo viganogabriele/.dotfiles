@@ -179,11 +179,10 @@ revert it with `git checkout Panel.qml` in the plugin dir first.
 4.5 added defaults on keys this config already uses. `bindings.lua` unbinds
 them: SUPER+SPACE stays the app launcher (Omarchy menu on SUPER+ALT+SPACE),
 SUPER+SHIFT+T is Telegram only (Activity/btop moved to SUPER+SHIFT+K), and
-SUPER+I / SUPER+SHIFT+I stay ChatGPT / Codex. IT <-> US-intl moved to
-SUPER+ALT+I (`omarchy-input-method cycle`, which switches the `it,us` layouts
-from `input.lua`; keep fcitx5's group to the single `keyboard-it`, or the two
-switch at once). Shift+Caps Lock switches too (`grp:shift_caps_toggle`);
-Caps Lock alone is a plain Caps Lock.
+SUPER+I / SUPER+SHIFT+I stay ChatGPT / Codex. IT <-> US-intl is
+Shift+Caps Lock (`grp:shift_caps_toggle` in `input.lua`); Caps Lock alone is a
+plain Caps Lock. Keep fcitx5's group to the single `keyboard-it`, or an extra
+`keyboard-*` entry gets switched together with the xkb layouts.
 
 ## 🗑️ Removing obsolete packages
 
