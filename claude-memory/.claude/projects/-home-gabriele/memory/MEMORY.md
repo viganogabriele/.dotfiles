@@ -8,3 +8,4 @@
 - [Preferenze energia laptop](user_laptop_power_prefs.md) — LG Gram: carica al 100%, wifi powersave off, niente TLP (solo PPD)
 - [No Claude attribution in git](feedback_no_git_attribution.md) — never add Co-Authored-By/Generated-with lines to commits or PRs
 - [Cloudflare DDNS + OpenCloud cutover](project_cloudflare_ddns_cutover.md) — stato 2026-10-30: DDNS/Traefik/Pocket ID fatti, manca apertura 80/443 e DNS cloud/auth
+- [Ruixen vs Omarchy 4.5](project_ruixen_omarchy45.md) — upstream Ruixen f776784 breaks on 4.5; rolled back 2026-11-16, check COMPATIBILITY.md before updating
