@@ -6,7 +6,9 @@
 hl.config({
   input = {
     -- IT (default on boot) + US (international, for accented letters via
-    -- ' and ` dead keys). Switch between them with Caps Lock (grp:caps_toggle).
+    -- ' and ` dead keys). Since Omarchy 4.5 keys go through fcitx5, so the
+    -- switch is SUPER+ALT+I (bindings.lua); grp:caps_toggle no longer changes
+    -- layout but is kept for its Shift+Caps Lock behaviour.
     -- NOTE: previously "grp:alts_toggle" (Left Alt + Right Alt), but that
     -- option grabs the Right Alt key so it can no longer act as AltGr on
     -- the IT layout, breaking AltGr+o (@) and other AltGr symbols.
