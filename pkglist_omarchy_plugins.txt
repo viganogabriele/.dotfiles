@@ -3,8 +3,6 @@ ch.wertstifter.tyme https://github.com/jheuing/omarchy-tyme
 crmne.hyprmoncfg https://github.com/crmne/omarchy-hyprmoncfg.git
 hamsti.vitals https://github.com/thehamsti/omarchy-vitals.git
 io.github.ajanraj.disposable-email https://github.com/ajanraj/omarchy-disposable-email.git
-io.github.ok.omakoe https://github.com/ok/omakoe.git
-io.github.spencerbull.omapilot https://github.com/spencerbull/omarchy-omapilot.git
 io.github.twiking.omasettings https://github.com/twiking/omasettings.git
 jkoestinger.vpn https://github.com/jkoestinger/omarchy-vpn.git
 omaplug https://github.com/fross100/omaplug

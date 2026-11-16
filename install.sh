@@ -257,6 +257,12 @@ if [[ -f "$DOTFILES/system/udev/99-ethernet-fix.rules" ]]; then
     sudo install -m 644 "$DOTFILES/system/udev/99-ethernet-fix.rules" /etc/udev/rules.d/99-ethernet-fix.rules
     sudo udevadm control --reload-rules
 fi
+# updatedb only prunes plain "fuse", not subtyped mounts. Crawling the rclone
+# OneDrive / gvfs mounts left it stuck in a FUSE lookup, which blocked suspend
+# ("1 tasks refusing to freeze: updatedb") and preceded a gvfsd-fuse crash.
+if [[ -f /etc/updatedb.conf ]] && ! grep -q 'fuse\.rclone' /etc/updatedb.conf; then
+    sudo sed -i 's|^PRUNEFS = "|PRUNEFS = "fuse.rclone fuse.gvfsd-fuse fuse.portal |' /etc/updatedb.conf
+fi
 
 # --- 9c. mise-managed Python: ensure setuptools (distutils shim) ---
 # mise's python builds ship with pip only, no setuptools. `g-ir-scanner`

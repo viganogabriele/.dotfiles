@@ -160,6 +160,28 @@ config files before resolving
 Stow conflicts; Ruixen's installer may have replaced previously stowed
 files.
 
+### Galaxy Buds plugin on Omarchy 4.5
+
+Omarchy 4.5's base `Panel` already defines `onOpenedChanged`, so the
+marketplace `aislandener.galaxy-buds` plugin fails to load ("Property value set
+multiple times"). Until upstream fixes it, apply the local patch:
+
+```bash
+git -C ~/.config/omarchy/plugins/aislandener.galaxy-buds apply ~/.dotfiles/personal/.local/share/dotfiles/galaxy-buds/omarchy-4.5-opened-handler.patch
+omarchy-restart-shell
+```
+
+`omarchy plugin update` refuses to fast-forward while the patch is applied;
+revert it with `git checkout Panel.qml` in the plugin dir first.
+
+### Omarchy 4.5 keybinding conflicts
+
+4.5 added defaults on keys this config already uses. `bindings.lua` unbinds
+them: SUPER+SPACE stays the app launcher (Omarchy menu on SUPER+ALT+SPACE),
+SUPER+SHIFT+T is Telegram only (Activity/btop moved to SUPER+SHIFT+K), and
+SUPER+I / SUPER+SHIFT+I stay ChatGPT / Codex (keyboard layout switches with
+Caps Lock via `input.lua`).
+
 ## 🗑️ Removing obsolete packages
 
 When a machine has drifted (e.g. the desktop still had Omarchy 3 packages —

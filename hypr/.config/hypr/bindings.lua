@@ -53,10 +53,16 @@ o.bind("SUPER + SHIFT + G", "WhatsApp", 'omarchy-launch-or-focus-webapp WhatsApp
 
 -- Match Telegram's window class, not a generic title containing "Telegram".
 -- This avoids focusing terminals whose title happens to mention Telegram.
+-- Omarchy 4.5 put Activity (btop) on SUPER+SHIFT+T: move it to SUPER+SHIFT+K.
+hl.unbind("SUPER + SHIFT + T") -- was: Activity (btop)
+o.bind("SUPER + SHIFT + K", "Activity", { tui = "btop" })
 o.bind("SUPER + SHIFT + T", "Telegram", "omarchy-launch-or-focus 'org[.]telegram[.]desktop' Telegram")
 
--- Claude / ChatGPT web: free keys, no default to unbind.
+-- Claude / ChatGPT web. Omarchy 4.5 put input-language cycling on SUPER+I and
+-- SUPER+SHIFT+I; drop it so these keys only open ChatGPT / Codex.
 -- Always opens a new browser window (not focus-if-open).
+hl.unbind("SUPER + I") -- was: Switch input language
+hl.unbind("SUPER + SHIFT + I") -- was: Switch input language back
 o.bind("SUPER + U", "Claude", 'omarchy-launch-webapp "https://claude.ai/new"')
 o.bind("SUPER + I", "ChatGPT", 'omarchy-launch-webapp "https://chatgpt.com/"')
 
@@ -106,3 +112,17 @@ o.bind("SUPER + SHIFT + R", "Ruixen Settings: Audio",
 o.bind("SUPER + N", "Ruixen notch dashboard",
   "omarchy-shell ruixen.notch toggleDashboard")
 -- END Ruixen Shell
+
+hl.bind("CTRL + SHIFT + 2", hl.dsp.global("com.t3tools.T3Code:capture-window"))
+
+-- Dictation keys from before Alt + Space and Right Alt became the defaults.
+-- Remove these lines to give the keys back to applications.
+if o.dictation_installed and o.dictation_installed() then
+  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
+end
+
+-- Keep the pre-4.5 layout: SUPER+SPACE opens the app launcher, SUPER+ALT+SPACE the Omarchy menu.
+hl.unbind("SUPER + SPACE")
+hl.unbind("SUPER + ALT + SPACE")
+o.bind("SUPER + SPACE", "Apps", "omarchy-shell omarchy.dock apps")
+o.bind("SUPER + ALT + SPACE", "Omarchy menu", { menu = "root" })
