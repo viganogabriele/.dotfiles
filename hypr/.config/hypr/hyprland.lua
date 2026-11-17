@@ -32,7 +32,7 @@ require("default.hypr.toggles")
 -- T3 Code is a background worker for me: it must not reclaim focus or change
 -- workspace when Electron sends an activation request. Its workspace is left
 -- untouched and is determined by where it is launched.
-o.window("^t3code$", {
+o.window("^com.t3tools.T3Code$", {
   no_initial_focus = true,
   focus_on_activate = false,
   suppress_event = "activate activatefocus",
